@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import SearchBar from "./SearchBar"; // Asegúrate de importar el componente SearchBar
 import styles from "../styles/ProductList.module.css"; // Importa los estilos del módulo
 
+
 const ProductsList = ({ selectedCategory }) => {
   const [products, setProducts] = useState([]);
   const [displayedProducts, setDisplayedProducts] = useState([]);

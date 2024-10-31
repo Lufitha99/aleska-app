@@ -1,5 +1,7 @@
+
 import React, { useEffect, useState } from 'react';
 import { getAllCategories } from '../api/Categories'; // Asegúrate de que esta función esté definida en tu API
+
 
 const CategoriesList = ({ onSelectCategory }) => {
   const [categories, setCategories] = useState([]);
