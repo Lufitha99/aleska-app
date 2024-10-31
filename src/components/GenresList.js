@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { getAllCategories } from '../api/Categories';
+import React, { useEffect, useState } from "react";
+import { getAllCategories } from "../api/Categories";
 
 const GenresList = () => {
   const [categories, setCategories] = useState([]);

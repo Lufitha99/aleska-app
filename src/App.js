@@ -1,24 +1,21 @@
-import React from 'react';
-import GenresList from './components/GenresList';
-import ProductsList from './components/ProductsList';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./components/Home";
+import Products from "./components/Products";
+
 const App = () => {
   return (
-    <div className="container mt-5">
-      <h1 className="text-center mb-5">Tienda de Ropa en Línea</h1>
-      <div className="row">
-        {/* Columna para el listado de géneros */}
-        <div className="col-md-4">
-          <h2 className="mb-4">Géneros</h2>
-          <GenresList />
-        </div>
-        
-        {/* Columna para el listado de productos */}
-        <div className="col-md-8">
-          <h2 className="mb-4">Productos</h2>
-          <ProductsList />
-        </div>
+    <Router>
+      <div className="App">
+        <Routes>
+          {/* Ruta para la página principal */}
+          <Route path="/" element={<Home />} />
+
+          {/* Ruta para la página de productos */}
+          <Route path="/products" element={<Products />} />
+        </Routes>
       </div>
-    </div>
+    </Router>
   );
 };
 
