@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { getAllCategories } from "../api/Categories";
 
-const GenresList = () => {
+import React, { useEffect, useState } from 'react';
+import { getAllCategories } from '../api/Categories'; // Asegúrate de que esta función esté definida en tu API
+
+
+const CategoriesList = ({ onSelectCategory }) => {
   const [categories, setCategories] = useState([]);
+  const [activeCategory, setActiveCategory] = useState(null);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -12,22 +15,24 @@ const GenresList = () => {
     fetchCategories();
   }, []);
 
+  const handleCategoryClick = (category) => {
+    setActiveCategory(category);
+    onSelectCategory(category);
+  };
+
   return (
-    <div className="container mt-4">
-      <h2>Géneros</h2>
-      <div className="row">
-        {categories.map((category) => (
-          <div className="col-md-4 mb-4" key={category}>
-            <div className="card">
-              <div className="card-body">
-                <h5 className="card-title">{category}</h5>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
+    <nav className="nav flex-column">
+      {categories.map((category) => (
+        <button
+          key={category.id}
+          className={`nav-link ${activeCategory === category.name ? 'active' : ''}`}
+          onClick={() => handleCategoryClick(category.name)}
+        >
+          {category.name}
+        </button>
+      ))}
+    </nav>
   );
 };
 
-export default GenresList;
+export default CategoriesList;

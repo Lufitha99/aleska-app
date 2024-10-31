@@ -1,0 +1,65 @@
+.container {
+    display: flex; /* Cambia el contenedor a flexbox */
+    flex-wrap: wrap; /* Permite que las tarjetas se ajusten en varias filas */
+    justify-content: center; /* Centra las tarjetas horizontalmente */
+  }
+  
+  .card {
+    border:none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    height: 400px; /* Fija una altura para todas las tarjetas */
+    margin: 10px; /* Espaciado entre tarjetas */
+    cursor: pointer;
+  }
+  
+  .card img {
+    object-fit: contain; /* Cambia a contain para que la imagen se ajuste al contenedor sin recortarse */
+    height: 270px; /* Fija una altura para la imagen */
+    width: 100%; /* Que la imagen ocupe todo el ancho */
+    transition: transform 0.3s; /* Transición suave para el efecto de aumento de imagen */
+  }
+  
+  .card img:hover {
+    transform: scale(1.1); /* Aumenta la imagen al pasar el mouse */
+  }
+  .card:hover .title{
+    color: fuchsia;
+  }
+  /* Texto sobre la imagen */
+.overlay-text {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 1.2rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .image-container:hover .overlay-text {
+    opacity: 1; /* Muestra el texto al pasar el mouse */
+  }
+  .eyeIcon {
+    position: absolute;
+    bottom: 40%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: none; /* Ocultar el icono por defecto */
+  }
+
+  .link {
+    color: inherit; /* Asegúrate de que el icono tenga el mismo color que el texto */
+    text-decoration: none; /* Elimina el subrayado del enlace */
+    font-size: 24px; /* Ajusta el tamaño del icono según tus preferencias */
+  }
+  .price{
+    background-color: rgba(255, 215, 0, 0.15);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
