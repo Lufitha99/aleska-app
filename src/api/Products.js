@@ -14,8 +14,14 @@ export const getProductById = async (id) => {
 
 // Llamada para obtener productos según categoría
 export const getProductsByCategory = async (category) => {
-  const response = await api.get(`/products/category/${category}`);
-  return response.data;
+  try {
+    const response = await api.get(`/products/category/${category}`);
+    console.log(`Respuesta de la API para la categoría ${category}:`, response.data);
+    return response.data;
+  } catch (error) {
+    console.error('Error al obtener productos por categoría:', error);
+    return [];
+  }
 };
 
 export const addProduct = async (newProduct) => {
