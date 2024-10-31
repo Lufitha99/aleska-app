@@ -55,10 +55,10 @@ const ProductsList = ({ selectedCategory }) => {
   };
 
   return (
-    <div className={`container ${styles.container}`}>
-      <h2>Productos</h2>
+    <div className={`container mt-5  text-center`}>
+
       <SearchBar products={products} onSearchResults={handleSearchResults} />
-      <div className="row">
+      <div className="row ">
         {paginatedProducts.map((product) => (
           <div className="col-md-4 mb-4" key={product.id}>
             <Link to={`/product/${product.id}`} className={styles.link}>
@@ -119,14 +119,14 @@ const ProductsList = ({ selectedCategory }) => {
       {selectedCategory === "all" && (
         <div className={styles["button-container"]}>
           <button
-            className="btn btn-secondary"
+            className="btn btn-dark m-2"
             onClick={handlePrevious}
             disabled={currentPage === 0}
           >
             Anterior
           </button>
           <button
-            className="btn btn-secondary"
+            className="btn btn-dark m-2"
             onClick={handleNext}
             disabled={(currentPage + 1) * itemsPerPage >= displayedProducts.length}
           >
