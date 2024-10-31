@@ -9,6 +9,7 @@ function Header() {
 
   const imgStyle = {
     width: "100%",
+    filter: "brightness(0.9)",
   };
 
   const contentStyle = {
