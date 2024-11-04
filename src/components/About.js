@@ -4,17 +4,20 @@ import styles from '../styles/AboutStyles.module.css';
 const About = () => {
     useEffect(() => {
         const sections = document.querySelectorAll(`.${styles["about-section"]}`);
-        const handleScroll = () => {
-            sections.forEach(section => {
-                const sectionTop = section.getBoundingClientRect().top;
-                if (sectionTop < window.innerHeight - 100) {
-                    section.classList.add(styles["fade-in"]);
-                }
-            });
-        };
-        
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add(styles["fade-in"]);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.1 }
+        );
+
+        sections.forEach(section => observer.observe(section));
+        return () => observer.disconnect();
     }, []);
 
     return (
