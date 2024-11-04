@@ -1,0 +1,83 @@
+.about-container {
+  font-family: Arial, sans-serif;
+  color: #333;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.about-hero h1 {
+  font-size: 2.5rem;
+  color: #d291bc;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.about-hero p {
+  font-size: 1.2rem;
+  color: #555;
+  text-align: center;
+}
+
+.about-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.about-section {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  border-left: 4px solid #d291bc;
+  padding-left: 1rem;
+  margin: 2rem 0;
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.about-section.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.about-title {
+  font-size: 1.8rem;
+  color: #d291bc;
+  margin-bottom: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.about-text,
+.about-list {
+  font-size: 1rem;
+  color: #555;
+}
+
+.about-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0;
+}
+
+.about-list li {
+  padding: 0.3rem 0;
+  transition: color 0.3s ease;
+}
+
+.about-section:hover .about-title {
+  color: #b56aa6;
+}
+
+.about-section:hover .about-list li, 
+.about-section:hover .about-text {
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .about-content {
+    padding: 0 1rem;
+  }
+}
