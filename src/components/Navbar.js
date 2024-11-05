@@ -145,7 +145,7 @@ flex-grow: 0.5;
 flex-grow: 0.9;
   }
   @media (max-width: 425px) {
-flex-grow: 0.8;
+flex-grow: 0.9;
   }
 `
 function Navbar({ selectedCategory, setSelectedCategory }) {
