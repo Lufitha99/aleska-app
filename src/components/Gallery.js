@@ -1,27 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import KmodeloImage from "../Assets/Kmodelo.jpg";
 import AccImage from "../Assets/Acc.jpg";
+import styles from "../styles/Gallery.module.css"; // Importamos el módulo CSS
 
 function Gallery() {
-  const images = [KmodeloImage, AccImage];
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
-  const imgStyle = {
-    width: "100%",
-    height: "500px",
-    objectFit: "cover",
-    filter: "brightness(0.9)",
-    marginBottom: "40px",
-  };
+  const images = [
+    { src: KmodeloImage, text: "Luce Espectacular en Cada Ocasión", buttonText: "Ver Colección" },
+    { src: AccImage, text: "Accesorios que Transforman tu Día a Día", buttonText: "Descubre Más" },
+  ];
 
   return (
-    <div className="gallery">
+    <div className={styles.gallery}>
       {images.map((image, index) => (
-        <img
-          key={index}
-          src={image}
-          alt={`gallery-${index}`}
-          style={imgStyle}
-        />
+        <div key={index} className={styles.imageContainer}>
+          <img
+            src={image.src}
+            alt={`gallery-${index}`}
+            className={styles.imgStyle}
+          />
+          <div className={styles.overlayStyle}>
+            <h2 className={styles.title}>{image.text}</h2>
+            <Link to="/products" style={{ textDecoration: "none" }}>
+              <button
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(null)}
+                className={`${styles.buttonStyle} ${hoveredIndex === index ? styles.buttonHover : ""}`}
+              >
+                {image.buttonText}
+              </button>
+            </Link>
+          </div>
+        </div>
       ))}
     </div>
   );
