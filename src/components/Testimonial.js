@@ -41,7 +41,9 @@ function Testimonial() {
   };
 
   return (
-    <div
+    <div style={{textAlign: 'center'}}>
+      <h1 style={{fontFamily: "'Aboreto', sans-serif", marginBottom: '2%', borderBottom: '1px solid black',paddingBottom: '2px'}}> Lo que dicen nuestros clientes</h1>
+      <div
       style={{
         backgroundColor: "#FBEEF8",
         padding: "60px",
@@ -54,6 +56,7 @@ function Testimonial() {
         marginBottom: "40px",
       }}
     >
+
       <button
         onClick={handlePrev}
         style={{
@@ -109,6 +112,8 @@ function Testimonial() {
         ❯
       </button>
     </div>
+    </div>
+    
   );
 }
 
