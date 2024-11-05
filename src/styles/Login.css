@@ -1,0 +1,118 @@
+/* .container {
+    width: 100%;
+    height: 100vh;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+} */
+
+
+
+.login-container {
+    display: flex;
+    height: 80vh;
+    border: 1px solid #ddd;
+    }
+    
+    .login-form-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      background-color: #f9f9f9;
+    }
+    
+    .login-form {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+    
+    .login-logo {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+    
+    h2 {
+      margin-bottom: 10px;
+      
+    }
+    
+    p {
+      margin-bottom: 20px;
+      color: #666;
+    }
+    
+    .form-group {
+      margin-bottom: 15px;
+      text-align: left;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 4px;
+    }
+    
+    .form-group input {
+      width: 98%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      -ms-border-radius: 5px;
+      -o-border-radius: 5px;
+  }
+    
+    .login-button {
+      width:100%;
+      padding: 10px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    .login-button:hover {
+      background-color: #555;
+    }
+    
+    .login-links {
+      margin-top: 15px;
+    }
+    
+    .forgot-password {
+      display: block;
+      margin-bottom: 10px;
+      color: #007bff;
+      text-decoration: none;
+    }
+    
+    .forgot-password:hover {
+      text-decoration: underline;
+    }
+    
+    .sign-up-link {
+      color: #007bff;
+      text-decoration: none;
+    }
+    
+    .sign-up-link:hover {
+      text-decoration: underline;
+    }
+    
+    .login-image-container {
+      flex: 1;
+      background-size: cover;
+      background-position: center;
+    }
