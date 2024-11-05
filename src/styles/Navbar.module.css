@@ -1,0 +1,8 @@
+.flex-grow-style{
+    flex-grow: 0.5;
+}
+  @media (max-width: 768px) {
+    .flex-grow-style{
+        flex-grow: 0.9;
+    }
+  }
