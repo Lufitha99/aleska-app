@@ -5,7 +5,9 @@ import Navbar from "./components/Navbar";
 import ProductsList from './components/ProductsList';
 import ProductDetail from './components/ProductDetail';
 import About from "./components/About";
+import LoginC from "./components/Login";
 import Footer from "./components/Footer";
+
 const App = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
 
@@ -21,6 +23,7 @@ const App = () => {
         <Route path="/product/:id/:category" element={<ProductDetail />} />
         <Route path="/products/:category" element={<ProductsList selectedCategory={selectedCategory} />} />
         <Route path="/about" element={<About />} /> 
+        <Route path="/Login" element={<LoginC />}/>
       </Routes>
       <Footer/>
     </Router>
