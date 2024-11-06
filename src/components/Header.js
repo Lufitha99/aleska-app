@@ -65,7 +65,8 @@ const Paragraph = styled.p`
   font-family: "Aboreto", sans-serif;
   font-size: 1.5rem;
   font-weight: 100;
-
+    margin: 0;
+    color: #3c3c3c;
   @media (max-width: 768px) {
     font-size: 1rem; // Reducir tamaño de fuente en móviles
   }
@@ -114,7 +115,9 @@ function Header() {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
-            COMPRAR 
+
+            COMPRA AHORA
+
           </Button>
         </Link>
       </ContentContainer>

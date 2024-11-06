@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getProductById } from "../api/Products";
 import styles from "../styles/ProductDetail.module.css";
- 
-const ProductDetail = () => {
+ import ProductActions from "./ProductActions";
+import Swal from 'sweetalert2'; // Asegúrate de haber instalado sweetalert2
+
+const ProductDetail = ({ addToCart, userId }) => {
+
   const { id, category } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -11,8 +14,11 @@ const ProductDetail = () => {
   const [reviews, setReviews] = useState([]);
   const [userRating, setUserRating] = useState(0);
   const [reviewImage, setReviewImage] = useState(null);
- console.log (id);
- console.log (category);
+
+  const [cartItems, setCartItems] = useState([]);
+  const [message, setMessage] = useState(""); // Estado para el mensaje
+  const [showMessage, setShowMessage] = useState(false); // Estado para controlar la visibilidad del mensaje
+
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -26,11 +32,10 @@ const ProductDetail = () => {
     };
     fetchProduct();
   }, [id, category]);
- 
   const handleReviewSubmit = (e) => {
     e.preventDefault();
     if (reviewText.trim() === "") return;
- 
+
     setReviews([
       {
         text: reviewText,
@@ -42,16 +47,17 @@ const ProductDetail = () => {
       },
       ...reviews,
     ]);
- 
+
     setReviewText("");
     setUserRating(0);
     setReviewImage(null);
   };
- 
+
+
   const handleRatingClick = (rating) => {
     setUserRating(rating);
   };
- 
+
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -59,13 +65,39 @@ const ProductDetail = () => {
       setReviewImage(imageUrl);
     }
   };
- 
+
   const handleReaction = (index, type) => {
     setReviews(reviews.map((review, i) => (
       i === index ? { ...review, [type]: review[type] + 1 } : review
     )));
   };
- 
+
+  const handleAddProductToCart = (product) => {
+    if (userId) {
+      setCartItems((prevItems) => {
+        const updatedCartItems = [...prevItems, product];
+        console.log("Cantidad de productos en el carrito:", updatedCartItems.length); // Muestra la cantidad de productos en consola
+        return updatedCartItems;
+      });
+      setMessage(`"${product.title}" ha sido añadido al carrito.`);
+      setShowMessage(true);
+      setTimeout(() => setShowMessage(false), 3000); 
+    } else {
+      setMessage("Debes estar logueado para agregar productos al carrito.");
+      setShowMessage(true);
+      setTimeout(() => setShowMessage(false), 3000); 
+    }
+  };
+  const handlePayment = async () => {
+    await Swal.fire({
+      title: 'Pago Confirmado',
+      text: 'Los productos llegarán en 7 días hábiles.',
+      icon: 'success',
+      confirmButtonText: 'Aceptar',
+    });
+
+  };
+
   // Muestra opciones adicionales según la categoría del producto
   const renderAdditionalOptions = () => {
     if (category === "jewelery") {
@@ -181,6 +213,15 @@ const ProductDetail = () => {
   return (
     <div className={styles.container}>
       <div className="row">
+
+      <ProductActions userId={userId} cartItemsCount={cartItems.length} />
+
+      {showMessage && (
+        <div className="alert alert-success" role="alert">
+          {message}
+        </div>
+      )}
+
         <div className="col-md-6 text-center">
           <img
             src={product.image}
@@ -189,8 +230,10 @@ const ProductDetail = () => {
           />
         </div>
         <div className="col-md-6">
-          <h2>{product.title}</h2>
-          <p className={styles.price}><strong>Precio:</strong> ${product.price}</p>
+
+          <h2 className={styles.titleProduct}>{product.title}</h2>
+          <p className={styles.price}>${product.price}</p>
+
           <div className={styles.rating}>
             {"★".repeat(Math.round(product.rating.rate))}
             {"☆".repeat(5 - Math.round(product.rating.rate))}
@@ -205,13 +248,23 @@ const ProductDetail = () => {
           {/* Información adicional que solicitaste */}
           <p>Categoría: {category}</p>
          
-          <button className={styles.button}>Comprar</button>
-          <button className={styles.button}>Añadir al carrito</button>
+
+          <button
+        className={styles.button}
+        onClick={handlePayment}
+      >
+        Comprar
+      </button>
+          <button className={styles.button} onClick={() => handleAddProductToCart(product)}>Añadir al carrito</button>
+
         </div>
       </div>
  
       <div className="mt-5">
         <h3>Opiniones de Usuarios</h3>
+
+        {userId && (
+
         <form onSubmit={handleReviewSubmit} className="mb-4">
           <div className="form-group">
             <textarea
@@ -222,32 +275,43 @@ const ProductDetail = () => {
               onChange={(e) => setReviewText(e.target.value)}
             ></textarea>
           </div>
-          <div className="d-flex align-items-center mb-2">
-            <span className="mr-2">Calificación:</span>
-            {[1, 2, 3, 4, 5].map((star) => (
-              <span
-                key={star}
-                className={star <= userRating ? styles.starFilled : styles.starEmpty}
-                onClick={() => handleRatingClick(star)}
+
+         
+          <div className="form-group" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <span className="mr-2">Califica:</span>
+              {[1, 2, 3, 4, 5].map((star) => (
+                <span
+                  key={star}
+                  className={star <= userRating ? styles.starFilled : styles.starEmpty}
+                  onClick={() => handleRatingClick(star)}
+                >
+                  ★
+                </span>
+              ))}
+            </div>
+
+            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+              <input
+                type="file"
+                className={styles.customFileInput}
+                onChange={handleImageChange}
+              />
+              <button
+                type="button"
+                className={styles.button}
+                onClick={() => document.querySelector(`input[type='file']`).click()}
               >
-                ★
-              </span>
-            ))}
+                <i className="fa-solid fa-paperclip"></i>
+              </button>
+              <button type="submit" className={styles.button}>Enviar</button>
+            </div>
           </div>
-          <div className="form-group">
-            <label className={styles.customFileLabel}>Subir imagen:</label>
-            <input
-              type="file"
-              className={styles.customFileInput}
-              onChange={handleImageChange}
-            />
-            <button type="button" className={styles.button} onClick={() => document.querySelector(`input[type='file']`).click()}>
-              Subir archivo
-            </button>
-          </div>
-          <button type="submit" className={styles.button}>Enviar Reseña</button>
+          
         </form>
- 
+        )}
+  {!userId && <p>Inicia sesión para dejar una reseña.</p>}
+
         <div>
           {reviews.length > 0 ? (
             reviews.map((review, index) => (
@@ -264,10 +328,12 @@ const ProductDetail = () => {
                 <small>{review.date.toLocaleString()}</small>
                 <div className="d-flex mt-2">
                   <button onClick={() => handleReaction(index, "likes")} className={styles.reactionButton}>
-                    👍 {review.likes}
+
+                  <i className="fa-solid fa-thumbs-up"></i> {review.likes}
                   </button>
                   <button onClick={() => handleReaction(index, "dislikes")} className={styles.reactionButton}>
-                    👎 {review.dislikes}
+                  <i className="fa-solid fa-thumbs-down"></i> {review.dislikes}
+
                   </button>
                 </div>
               </div>

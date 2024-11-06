@@ -1,141 +1,215 @@
 
 .container {
-    padding: 20px;
-  }
- 
-  .productImage {
-    max-width: 100%;
-    max-height: 500px;
-    border-radius: 10px;
-  }
- 
-  .rating {
-    color: #ffcc00;
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-  }
- 
-  .button {
-    background-color: black;
-    color: white;
-    border-radius: 8px;
-    padding: 10px 20px;
-    border: none;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
- 
-  .button:hover {
-    background-color: #333;
-  }
- 
-  .starFilled {
-    cursor: pointer;
-    color: yellow;
-    font-size: 1.5rem;
-  }
- 
-  .starEmpty {
-    cursor: pointer;
-    color: gray;
-    font-size: 1.5rem;
-  }
- 
-  .reviewImage {
-    max-width: 300px;
-    max-height: 300px;
-    border-radius: 8px;
-    margin-top: 10px;
-  }
- 
-  .reactionButton {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: gray;
-    margin-right: 10px;
-    font-size: 1.1rem;
-  }
- 
-  .reactionButton:hover {
-    color: black;
-  }
- 
-  .customFileLabel {
-    display: block;
-    color: #555;
-    font-weight: bold;
-    margin-bottom: 8px;
-  }
- 
-  .customFileInput {
-    display: none;
-  }
- 
-  .fileButton {
-    background-color: #007bff;
-    color: white;
-    border-radius: 5px;
-    padding: 8px 12px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    display: inline-block;
-  }
- 
-  .fileButton:hover {
-    background-color: #0056b3;
-  }
-  .price {
-    font-size: 2rem; /* Aumenta el tamaño según prefieras */
-    font-weight: bold;
-    color: #333;
-    margin-top: 10px;
-  }
+  padding: 20px;
+}
 
-  .description {
-    font-size: 1.25rem; /* Tamaño de la descripción */
-    line-height: 1.6;
-    color: #666;
-    margin-top: 10px;
+.productImage {
+  max-width: 100%;
+  max-height: 500px;
+  border-radius: 10px;
+}
+
+.rating {
+  color: #ffcc00;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.button {
+  background-color: black;
+  color: white;
+  border-radius: 8px;
+  padding: 10px 20px;
+  border: none;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #333;
+}
+
+.starFilled {
+  cursor: pointer;
+  color: rgb(255, 221, 0);
+  font-size: 1.5rem;
+}
+
+.starEmpty {
+  cursor: pointer;
+  color: gray;
+  font-size: 1.5rem;
+}
+
+.reviewImage {
+  max-width: 300px;
+  max-height: 300px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.reactionButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: gray;
+  margin-right: 10px;
+  font-size: 1.1rem;
+}
+
+.reactionButton:hover {
+  color: black;
+}
+
+.customFileLabel {
+  display: block;
+  color: #555;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.customFileInput {
+  display: none;
+}
+
+.fileButton {
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: inline-block;
+}
+
+.fileButton:hover {
+  background-color: #0056b3;
+}
+.price {
+  font-size: 3rem; /* Aumenta el tamaño según prefieras */
+  font-weight: 400;
+  color: #000000;
+  margin-top: 10px;
+}
+.titleProduct{
+  text-align: justify!important;
+}
+.description {
+  font-size: 1.25rem; /* Tamaño de la descripción */
+  line-height: 1.6;
+  color: #666;
+  margin-top: 10px;
+}
+.optionGroup {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.optionButton {
+  background-color: #f0f0f0;
+  border: 2px solid #ddd;
+  padding: 10px 20px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.optionButton:hover {
+  background-color: #000000;
+  border-color: #000000;
+  color: white;
+}
+
+.colorGroup {
+  display: flex;
+  gap: 10px;
+}
+
+.colorCircle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid #ddd;
+  transition: border-color 0.3s ease;
+}
+
+.colorCircle:hover {
+  border-color: #007bff;
+}
+
+
+.review {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  margin-bottom: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.review p {
+  font-size: 1rem;
+  margin: 0 0 10px;
+  color: #333;
+}
+
+.rating {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.starFilled {
+  color: #ffcc00;
+}
+
+.starEmpty {
+  color: #ccc;
+}
+
+.reviewImage {
+  max-width: 300px;
+  max-height: 200px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+small {
+  color: #888;
+  font-size: 0.9rem;
+  margin-top: 8px;
+}
+
+.reactionButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #606060;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-right: 15px;
+}
+
+.reactionButton:hover {
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 8% 5% 5% 5%;
   }
-  .optionGroup {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
+}
+@media (max-width: 425px) {
+  .container {
+    padding: 15% 8% 8% 8%;
   }
-  
-  .optionButton {
-    background-color: #f0f0f0;
-    border: 2px solid #ddd;
-    padding: 10px 20px;
-    border-radius: 30px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-  }
-  
-  .optionButton:hover {
-    background-color: #000000;
-    border-color: #000000;
-    color: white;
-  }
-  
-  .colorGroup {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .colorCircle {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    cursor: pointer;
-    border: 2px solid #ddd;
-    transition: border-color 0.3s ease;
-  }
-  
-  .colorCircle:hover {
-    border-color: #007bff;
-  }
+}
+
