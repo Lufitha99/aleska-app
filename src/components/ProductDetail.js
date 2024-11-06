@@ -4,7 +4,7 @@ import { getProductById } from "../api/Products";
 import styles from "../styles/ProductDetail.module.css";
  import ProductActions from "./ProductActions";
 import Swal from 'sweetalert2'; // Asegúrate de haber instalado sweetalert2
-
+import RenderAdditionalOptions from "./RenderAditionalOptions";
 const ProductDetail = ({ addToCart, userId }) => {
 
   const { id, category } = useParams();
@@ -99,113 +99,7 @@ const ProductDetail = ({ addToCart, userId }) => {
   };
 
   // Muestra opciones adicionales según la categoría del producto
-  const renderAdditionalOptions = () => {
-    if (category === "jewelery") {
-      return (
-        <>
-          <div className="form-group my-3">
-            <label><strong>Material:</strong></label>
-            <div className={styles.optionGroup}>
-              <button className={styles.optionButton}>Oro</button>
-              <button className={styles.optionButton}>Plata</button>
-              <button className={styles.optionButton}>Platino</button>
-              <button className={styles.optionButton}>Acero inoxidable</button>
-            </div>
-          </div>
-          <div className="form-group my-3">
-            <label><strong>Tipo de piedra:</strong></label>
-            <div className={styles.optionGroup}>
-              <button className={styles.optionButton}>Diamante</button>
-              <button className={styles.optionButton}>Rubí</button>
-              <button className={styles.optionButton}>Esmeralda</button>
-              <button className={styles.optionButton}>Zafiro</button>
-              <button className={styles.optionButton}>Perla</button>
-            </div>
-          </div>
-        </>
-      );
-    }
-    if (category === "electronics") {
-      return (
-        <>
-          <div className="form-group my-3">
-            <label><strong>Capacidad de almacenamiento:</strong></label>
-            <div className={styles.optionGroup}>
-              <button className={styles.optionButton}>64 GB</button>
-              <button className={styles.optionButton}>128 GB</button>
-              <button className={styles.optionButton}>256 GB</button>
-              <button className={styles.optionButton}>512 GB</button>
-              <button className={styles.optionButton}>1 TB</button>
-            </div>
-          </div>
-          <div className="form-group my-3">
-            <label><strong>Color:</strong></label>
-            <div className={styles.colorGroup}>
-              <button className={styles.colorCircle} style={{ backgroundColor: 'black' }}></button>
-              <button className={styles.colorCircle} style={{ backgroundColor: 'white' }}></button>
-              <button className={styles.colorCircle} style={{ backgroundColor: 'gray' }}></button>
-              <button className={styles.colorCircle} style={{ backgroundColor: 'blue' }}></button>
-              <button className={styles.colorCircle} style={{ backgroundColor: 'gold' }}></button>
-            </div>
-          </div>
-          <div className="form-group my-3">
-            <label><strong>Tamaño de pantalla:</strong></label>
-            <div className={styles.optionGroup}>
-              <button className={styles.optionButton}>5"</button>
-              <button className={styles.optionButton}>6.1"</button>
-              <button className={styles.optionButton}>10"</button>
-              <button className={styles.optionButton}>13"</button>
-              <button className={styles.optionButton}>15"</button>
-            </div>
-          </div>
-        </>
-      );
-    }
-    if (category === "men's clothing" || category === "women's clothing") {
-      return (
-        <>
-          <div className="form-group my-3">
-            <label><strong>Talla:</strong></label>
-            <div className={styles.optionGroup}>
-              <button className={styles.optionButton}>S</button>
-              <button className={styles.optionButton}>M</button>
-              <button className={styles.optionButton}>L</button>
-              <button className={styles.optionButton}>XL</button>
-              <button className={styles.optionButton}>XXL</button>
-            </div>
-          </div>
-          <div className="form-group my-3">
-            <label><strong>Color:</strong></label>
-            <div className={styles.colorGroup}>
-              <button className={styles.colorCircle} style={{ backgroundColor: 'black' }}></button>
-              <button className={styles.colorCircle} style={{ backgroundColor: 'white' }}></button>
-              <button className={styles.colorCircle} style={{ backgroundColor: 'gray' }}></button>
-              <button className={styles.colorCircle} style={{ backgroundColor: 'blue' }}></button>
-              <button className={styles.colorCircle} style={{ backgroundColor: 'gold' }}></button>
-            </div>
-          </div>
-          <div className="form-group my-3">
-            <label><strong>Material:</strong></label>
-            <div className={styles.optionGroup}>
-              <button className={styles.optionButton}>Algodón</button>
-              <button className={styles.optionButton}>Poliéster</button>
-              <button className={styles.optionButton}>Lana</button>
-              <button className={styles.optionButton}>Mezcla de algodón</button>
-            </div>
-          </div>
-          <div className="form-group my-3">
-            <label><strong>Estilo:</strong></label>
-            <div className={styles.optionGroup}>
-              <button className={styles.optionButton}>Casual</button>
-              <button className={styles.optionButton}>Deportivo</button>
-              <button className={styles.optionButton}>Formal</button>
-            </div>
-          </div>
-        </>
-      );
-    }
-    return null;
-  };
+  
  
   if (loading) return <p>Cargando detalles...</p>;
   if (!product) return <p>No se encontró el producto.</p>;
@@ -243,7 +137,7 @@ const ProductDetail = ({ addToCart, userId }) => {
           
          
           {/* Sección de opciones adicionales */}
-          {renderAdditionalOptions()}
+          <RenderAdditionalOptions category={category} />
  
           {/* Información adicional que solicitaste */}
           <p>Categoría: {category}</p>

@@ -9,15 +9,16 @@ const ActionContainer = styled.div`
   justify-content: end;
   align-items: center;
   padding: 0 2rem;
+  margin-bottom: 2rem;
 `;
 
 const BackButton = styled.button`
-  background-color: #ff69b4;
-  border: none;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  color: white;
-  border-radius: 10px;
+   background-color: #ff69b4;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    color: white;
+    border-radius: 10px;
   cursor: pointer;
   &:hover {
     background-color: #e13f7d;
@@ -50,7 +51,7 @@ const ProductActions = ({ cartItemsCount, userId }) => {
   return (
     <ActionContainer>
       <Link to="/products">
-        <BackButton style={{marginRight: '10%'}}>Volver a productos</BackButton>
+        <BackButton style={{marginRight: '10%'}}><i class="fa-solid fa-circle-left"></i>Volver</BackButton>
       </Link>
       
       {userId && (
