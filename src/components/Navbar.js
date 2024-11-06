@@ -404,7 +404,9 @@ function Navbar({
                         className="fa-regular fa-user"
                         style={{ marginLeft: "14px" }}
                       ></i>
+
                       <SpanMensaje>Cerrar sesión</SpanMensaje>
+
                     </StyledButton>
                   </CategoryButton>
                 ) : (

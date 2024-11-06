@@ -6,6 +6,7 @@ import styles from "../styles/ProductDetail.module.css";
 import Swal from 'sweetalert2'; // Asegúrate de haber instalado sweetalert2
 import RenderAdditionalOptions from "./RenderAditionalOptions";
 const ProductDetail = ({ addToCart, userId }) => {
+
   const { id, category } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -13,9 +14,11 @@ const ProductDetail = ({ addToCart, userId }) => {
   const [reviews, setReviews] = useState([]);
   const [userRating, setUserRating] = useState(0);
   const [reviewImage, setReviewImage] = useState(null);
+
   const [cartItems, setCartItems] = useState([]);
   const [message, setMessage] = useState(""); // Estado para el mensaje
   const [showMessage, setShowMessage] = useState(false); // Estado para controlar la visibilidad del mensaje
+
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -29,7 +32,6 @@ const ProductDetail = ({ addToCart, userId }) => {
     };
     fetchProduct();
   }, [id, category]);
-
   const handleReviewSubmit = (e) => {
     e.preventDefault();
     if (reviewText.trim() === "") return;
@@ -51,6 +53,7 @@ const ProductDetail = ({ addToCart, userId }) => {
     setReviewImage(null);
   };
 
+
   const handleRatingClick = (rating) => {
     setUserRating(rating);
   };
@@ -68,6 +71,7 @@ const ProductDetail = ({ addToCart, userId }) => {
       i === index ? { ...review, [type]: review[type] + 1 } : review
     )));
   };
+
   const handleAddProductToCart = (product) => {
     if (userId) {
       setCartItems((prevItems) => {
@@ -93,6 +97,7 @@ const ProductDetail = ({ addToCart, userId }) => {
     });
 
   };
+
   // Muestra opciones adicionales según la categoría del producto
   
  
@@ -102,6 +107,7 @@ const ProductDetail = ({ addToCart, userId }) => {
   return (
     <div className={styles.container}>
       <div className="row">
+
       <ProductActions userId={userId} cartItemsCount={cartItems.length} />
 
       {showMessage && (
@@ -109,6 +115,7 @@ const ProductDetail = ({ addToCart, userId }) => {
           {message}
         </div>
       )}
+
         <div className="col-md-6 text-center">
           <img
             src={product.image}
@@ -117,8 +124,10 @@ const ProductDetail = ({ addToCart, userId }) => {
           />
         </div>
         <div className="col-md-6">
+
           <h2 className={styles.titleProduct}>{product.title}</h2>
           <p className={styles.price}>${product.price}</p>
+
           <div className={styles.rating}>
             {"★".repeat(Math.round(product.rating.rate))}
             {"☆".repeat(5 - Math.round(product.rating.rate))}
@@ -133,6 +142,7 @@ const ProductDetail = ({ addToCart, userId }) => {
           {/* Información adicional que solicitaste */}
           <p>Categoría: {category}</p>
          
+
           <button
         className={styles.button}
         onClick={handlePayment}
@@ -140,12 +150,15 @@ const ProductDetail = ({ addToCart, userId }) => {
         Comprar
       </button>
           <button className={styles.button} onClick={() => handleAddProductToCart(product)}>Añadir al carrito</button>
+
         </div>
       </div>
  
       <div className="mt-5">
         <h3>Opiniones de Usuarios</h3>
+
         {userId && (
+
         <form onSubmit={handleReviewSubmit} className="mb-4">
           <div className="form-group">
             <textarea
@@ -156,6 +169,7 @@ const ProductDetail = ({ addToCart, userId }) => {
               onChange={(e) => setReviewText(e.target.value)}
             ></textarea>
           </div>
+
          
           <div className="form-group" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <div style={{ display: "flex", alignItems: "center" }}>
@@ -191,6 +205,7 @@ const ProductDetail = ({ addToCart, userId }) => {
         </form>
         )}
   {!userId && <p>Inicia sesión para dejar una reseña.</p>}
+
         <div>
           {reviews.length > 0 ? (
             reviews.map((review, index) => (
@@ -207,10 +222,12 @@ const ProductDetail = ({ addToCart, userId }) => {
                 <small>{review.date.toLocaleString()}</small>
                 <div className="d-flex mt-2">
                   <button onClick={() => handleReaction(index, "likes")} className={styles.reactionButton}>
+
                   <i className="fa-solid fa-thumbs-up"></i> {review.likes}
                   </button>
                   <button onClick={() => handleReaction(index, "dislikes")} className={styles.reactionButton}>
                   <i className="fa-solid fa-thumbs-down"></i> {review.dislikes}
+
                   </button>
                 </div>
               </div>
