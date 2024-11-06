@@ -114,7 +114,7 @@ function Header() {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
-            SHOP NOW
+            COMPRAR 
           </Button>
         </Link>
       </ContentContainer>

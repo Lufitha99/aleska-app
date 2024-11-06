@@ -350,7 +350,7 @@ function Navbar({
                         className="fa-regular fa-user"
                         style={{ marginLeft: "14px" }}
                       ></i>
-                      <span style={{ marginLeft: "8.5px" }}>Logout</span>
+                      <span style={{ marginLeft: "8.5px" }}>Cerrar Sesión</span>
                     </StyledButton>
                     <span>{userName}</span>
                   </CategoryButton>
