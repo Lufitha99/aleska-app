@@ -317,7 +317,7 @@ function Navbar({
                     onClick={closeMenu}
                     className={location.pathname === "/about" ? "active" : ""}
                   >
-                    Sobre nosotros
+                     nosotros
                   </NavLink>
                 </NavItem>
                 <NavItem>
@@ -531,7 +531,7 @@ function Navbar({
                   onClick={closeMenu}
                   className={location.pathname === "/about" ? "active" : ""}
                 >
-                  Sobre nosotros
+                  Nosotros
                 </NavLink>
               </NavItem>
               <NavItem>
