@@ -6,7 +6,7 @@ import KenImage from "../Assets/ken.jpg";
 import Tecnologia from "../Assets/Tecnologia.jpg";
 import styles from "../styles/Categories.module.css"; // Importa el módulo CSS
 
-function Categories() {
+function Categories({ selectedCategory, setSelectedCategory }) { // Recibe selectedCategory y setSelectedCategory como props
   const navigate = useNavigate();
 
   const categories = [
@@ -17,7 +17,8 @@ function Categories() {
   ];
 
   const handleCategoryClick = (categoryName) => {
-    navigate(`/products/${categoryName}`);
+    setSelectedCategory(categoryName); // Actualiza el estado de la categoría seleccionada
+    navigate(`/products/${categoryName}`); // Navega a la nueva ruta
   };
 
   return (
@@ -25,13 +26,12 @@ function Categories() {
       {categories.map((category, index) => (
         <div
           key={index}
-          className={styles.category}
+          className={`${styles.category} ${selectedCategory === category.nameO ? styles.active : ""}`} // Aplicar clase activa
           onClick={() => handleCategoryClick(category.nameO)}
         >
           <img
             src={category.image}
             alt={category.name}
-            name={category.nameO}
             className={styles.image}
           />
           <h3 className={styles.title}>{category.name}</h3>

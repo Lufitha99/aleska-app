@@ -1,46 +1,47 @@
 import React, { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
 import { getAllProducts, getProductsByCategory } from "../api/Products";
-import { Link } from "react-router-dom";
-import SearchBar from "./SearchBar"; // Asegúrate de importar el componente SearchBar
-import styles from "../styles/ProductList.module.css"; // Importa los estilos del módulo
+import SearchBar from "./SearchBar";
+import styles from "../styles/ProductList.module.css";
 
-
-const ProductsList = ({ selectedCategory }) => {
+const ProductsList = ({ setFavorites, favorites,userId, addToCart  }) => {
+  const { categoryName } = useParams(); 
   const [products, setProducts] = useState([]);
   const [displayedProducts, setDisplayedProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
-  const itemsPerPage = 6; // Número de productos por página
+  const [message, setMessage] = useState(""); // Estado para el mensaje
+  const [showMessage, setShowMessage] = useState(false); // Estado para controlar la visibilidad del mensaje
+  const [cartItems, setCartItems] = useState([]);
+  const itemsPerPage = 6;
 
   useEffect(() => {
     const fetchProducts = async () => {
       let data;
-      if (selectedCategory === "all") {
+      if (!categoryName || categoryName === "all") {
         data = await getAllProducts();
-        setCurrentPage(0);
       } else {
-        data = await getProductsByCategory(selectedCategory);
+        data = await getProductsByCategory(categoryName);
       }
       setProducts(data);
-      setDisplayedProducts(data); // Inicialmente muestra todos los productos
+      setDisplayedProducts(data);
+      setCurrentPage(0);
     };
 
     fetchProducts();
-  }, [selectedCategory]);
+  }, [categoryName]);
 
-  // Maneja los resultados de búsqueda
   const handleSearchResults = (filteredProducts) => {
     setDisplayedProducts(filteredProducts);
-    setCurrentPage(0); // Reinicia la página al buscar
+    setCurrentPage(0);
   };
 
-  // Cálculo de productos a mostrar según la página actual
-  const paginatedProducts =
-    selectedCategory === "all"
+  const paginatedProducts = 
+    !categoryName || categoryName === "all"
       ? displayedProducts.slice(
           currentPage * itemsPerPage,
           (currentPage + 1) * itemsPerPage
         )
-      : displayedProducts; // Si no es "all", muestra todos los productos sin paginar
+      : displayedProducts;
 
   const handleNext = () => {
     if ((currentPage + 1) * itemsPerPage < displayedProducts.length) {
@@ -54,79 +55,93 @@ const ProductsList = ({ selectedCategory }) => {
     }
   };
 
-  return (
-    <div className={`container mt-5  text-center`}>
+  const handleAddToFavorites = (product) => {
+    setFavorites((prevFavorites) => {
+      if (!prevFavorites.some((fav) => fav.id === product.id)) {
+        // Mostrar mensaje al añadir a favoritos
+        setMessage(`"${product.title}" ha sido añadido a favoritos.`);
+        setShowMessage(true);
+        setTimeout(() => setShowMessage(false), 3000); // Ocultar el mensaje después de 3 segundos
+        return [...prevFavorites, product];
+      }
+      return prevFavorites; // No añadir si ya está en favoritos
+    });
+  };
+  const handleAddProductToCart = (product) => {
+    if (userId) {
+      addToCart(product); // Añade el producto al carrito
+      setCartItems((prevItems) => [...prevItems, product]);
+      setMessage(`"${product.title}" ha sido añadido al carrito.`);
+      setShowMessage(true);
+      setTimeout(() => setShowMessage(false), 3000); 
+    } else {
+      setMessage("Debes estar logueado para agregar productos al carrito.");
+      setShowMessage(true);
+      setTimeout(() => setShowMessage(false), 3000); 
+    }
+  };
 
-      <SearchBar products={products} onSearchResults={handleSearchResults} />
-      <div className="row ">
+  return (
+    <div className={`${styles.containerProduct} mt-5 text-center`}>
+      <SearchBar products={products} onSearchResults={handleSearchResults} favorites={favorites.length} userId={userId} cartItemsCount={cartItems.length} />
+      
+      {/* Mensaje de éxito */}
+      {showMessage && (
+        <div className="alert alert-success" role="alert">
+          {message}
+        </div>
+      )}
+      
+      <div className="row">
         {paginatedProducts.map((product) => (
           <div className="col-md-4 mb-4" key={product.id}>
-            <Link to={`/product/${product.id}`} className={styles.link}>
-              <div className={`card h-100 product-container ${styles.card}`}>
-                <div className="image-container">
-                  <img
-                    src={product.image}
-                    alt={product.title}
-                    className="card-img-top product-image"
-                  />
+            <div className={`card h-100 product-container ${styles.card}`}>
+              <div className="image-container">
+                <img
+                  src={product.image}
+                  alt={product.title}
+                  className="card-img-top product-image"
+                />
+                <Link to={`/product/${product.id}`}>
                   <button
-                    className=" btn btn-secondary overlay-text  m-2"
+                    className={`btn m-2 ${styles.btnDetail}`}
                     title="Detail"
-                    style={{
-                      border: "none",
-                      position: "relative",
-                      zIndex: "1",
-                      background: "black",
-                    }}
                   >
                     <i
                       className="fas fa-eye"
                       style={{ fontSize: "x-large", color: "white" }}
                     ></i>
                   </button>
-                  <button
-                    className=" btn btn-secondary overlay-text m-2"
-                    title="Add Favorites"
-                    style={{
-                      border: "none",
-                      position: "relative",
-                      zIndex: "1",
-                      background: "#FDB5EB",
-                    }}
-                  >
-                    <i
-                      className="fa-solid fa-heart"
-                      style={{ fontSize: "x-large", color: "black" }}
-                    ></i>
-                  </button>
-                </div>
-
-                <div className="card-body">
-                  <h5 className={`card-title ${styles.title}`}>
-                    {product.title}
-                  </h5>
-                  <p className={`card-text ${styles.price}`}>
-                    Precio: ${product.price}
-                  </p>
-                </div>
+                </Link>
+                <button
+                  className={`btn m-2 ${styles.btnFavorite}`}
+                  title="Add Favorites"
+                  onClick={() => handleAddToFavorites(product)}
+                >
+                  <i
+                    className="fa-solid fa-heart"
+                    style={{ fontSize: "x-large", color: "black" }}
+                  ></i>
+                </button>
+                <button className={`btn m-2 ${styles.btnCart}`} title="Add to Cart" onClick={() => handleAddProductToCart(product)}>
+                  <i className="fa-solid fa-shopping-cart" style={{ fontSize: "x-large", color: "black" }}></i>
+                </button>
               </div>
-            </Link>
+              <div className="card-body">
+                <h5 className={`card-title ${styles.title}`}>{product.title}</h5>
+                <p className={`card-text ${styles.price}`}>Precio: ${product.price}</p>
+              </div>
+            </div>
           </div>
         ))}
       </div>
-
-      {/* Renderiza los botones de paginación solo cuando selectedCategory es "all" */}
-      {selectedCategory === "all" && (
+      {(!categoryName || categoryName === "all") && (
         <div className={styles["button-container"]}>
-          <button
-            className="btn btn-dark m-2"
-            onClick={handlePrevious}
-            disabled={currentPage === 0}
-          >
+          <button className={`btn btn-dark m-2 ${styles.btnBottom}`} onClick={handlePrevious} disabled={currentPage === 0}>
             Anterior
           </button>
           <button
-            className="btn btn-dark m-2"
+            className={`btn btn-dark m-2 ${styles.btnBottom}`}
             onClick={handleNext}
             disabled={(currentPage + 1) * itemsPerPage >= displayedProducts.length}
           >

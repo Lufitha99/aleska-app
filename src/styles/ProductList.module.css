@@ -1,7 +1,8 @@
-.container {
+.containerProduct {
     display: flex; /* Cambia el contenedor a flexbox */
     flex-wrap: wrap; /* Permite que las tarjetas se ajusten en varias filas */
     justify-content: center; /* Centra las tarjetas horizontalmente */
+    padding: 1% 5% 5% 5%;
   }
   
   .card {
@@ -24,31 +25,29 @@
   }
   
   .card img:hover {
-    transform: scale(1.1); /* Aumenta la imagen al pasar el mouse */
+    transform: scale(1.1); 
   }
   .card:hover .title{
     color: fuchsia;
   }
   /* Texto sobre la imagen */
-.overlay-text {
+.overlayText {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
     font-size: 1.2rem;
-    opacity: 0;
-    transition: opacity 0.3s ease;
   }
   
   .image-container:hover .overlay-text {
-    opacity: 1; /* Muestra el texto al pasar el mouse */
+    opacity: 1; 
   }
   .eyeIcon {
     position: absolute;
     bottom: 40%;
     left: 50%;
     transform: translateX(-50%);
-    display: none; /* Ocultar el icono por defecto */
+    display: block; /* Ocultar el icono por defecto */
   }
 
   .link {
@@ -63,3 +62,32 @@
     font-size: 1.25rem;
     font-weight: bold;
   }
+  .btnBottom{
+    width: auto;
+  }
+  .btnDetail:hover {
+    background-color: #818181!important; /* Asegúrate de que este estilo sea visible */
+    transform: scale(1.1);
+    color: #4d4d4d!important;
+}
+
+.btnFavorite:hover {
+    background-color: #ff748b; /* Color de fondo para el hover */
+    transform: scale(1.1);
+    z-index: 1000;
+}
+.btnFavorite{
+  border: none;
+  position: relative;
+  z-index: 1;
+  background: #FDB5EB;
+  width:auto;
+}
+.btnDetail {
+  border: none;
+  position: relative;
+  z-index: 1;
+  background: #000000;
+  width: auto;
+color: white;
+}

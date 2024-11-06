@@ -1,3 +1,4 @@
+// RegisterPrompt.js
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -8,19 +9,19 @@ function RegisterPrompt() {
 
   const handleRegister = () => {
     console.log("Registro con correo:", email);
-    navigate("/login");
+    // Navegar al componente Signup y pasar el correo como parte del estado
+    navigate("/signup", { state: { email } });
   };
 
-  // Función para obtener el estilo del botón
   const buttonStyle = {
     marginTop: "10px",
-    backgroundColor: isHovered ? "Black" : "#FEEBB8", // Cambiar colores en hover
+    backgroundColor: isHovered ? "Black" : "#FEEBB8",
     border: "none",
-    color: isHovered ? "White" : "Black", // Cambiar colores en hover
+    color: isHovered ? "White" : "Black",
     borderRadius: "25px",
     padding: "10px 30px",
     fontSize: "2rem",
-    letterSpacing: isHovered ? "6px" : "4px", // Aumentar espacio entre letras en hover
+    letterSpacing: isHovered ? "6px" : "4px",
     fontWeight: "400",
     cursor: "pointer",
     boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
@@ -46,7 +47,7 @@ function RegisterPrompt() {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onClick={handleRegister}
-        style={buttonStyle} // Usar la función para obtener el estilo
+        style={buttonStyle}
       >
         Registrarme
       </button>

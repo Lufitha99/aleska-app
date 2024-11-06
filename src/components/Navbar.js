@@ -8,17 +8,17 @@ const NavbarContainer = styled.nav`
   background-color: #000;
   padding: 1rem 2rem;
   display: flex;
-  align-items: center; /* Alinea verticalmente los elementos */
+  align-items: center;
   color: #fff;
   position: sticky;
   z-index: 1000;
   top: 0;
   transition: background-color 0.3s ease;
-  flex-direction: row; /* Mantener en fila para alinear horizontalmente */
+  flex-direction: row;
 
   @media (max-width: 768px) {
     padding: 1rem;
-    flex-direction: column; /* Cambiar a columna en pantallas más pequeñas */
+    flex-direction: column;
   }
 `;
 
@@ -39,7 +39,8 @@ const NavLinks = styled.ul`
   padding: 0;
 
   @media (max-width: 768px) {
-    display: none; // Ocultar en móviles por defecto
+    display: none; // Mostrar u ocultar según el estado
+    flex-direction: column;
   }
 `;
 
@@ -64,8 +65,8 @@ const NavLink = styled(Link)`
   }
 
   &.active {
-    color: fuchsia; // Estilo para el enlace activo
-    text-decoration: underline; // Subrayado para indicar el enlace activo
+    color: fuchsia;
+    text-decoration: underline;
   }
 `;
 
@@ -89,13 +90,13 @@ const Hamburger = styled.div`
 
 const MobileMenu = styled.div`
   display: none; // Ocultar en pantallas grandes
-  position: absolute; // Posición absoluta para el menú
-  top: 80px; // Ajustar según la altura del Navbar
+  position: absolute;
+  top: 80px;
   left: 0;
   right: 0;
-  background-color: #000; // Fondo del menú
-  padding: 1rem 0; // Padding del menú
-  z-index: 999; // Asegurar que esté por encima
+  background-color: #000;
+  padding: 1rem 0;
+  z-index: 999;
 
   @media (max-width: 768px) {
     display: ${({ isOpen }) =>
@@ -114,7 +115,19 @@ const CategoriesContainer = styled.ul`
     flex-direction: column;
   }
 `;
-
+const NavLinksContainer = styled.ul`
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  text-align: center;
+  margin: 0;
+  ul {
+    display: flex;
+  }
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+`;
 const CategoryButton = styled.li`
   background: none;
   border: none;
@@ -137,20 +150,51 @@ const CategoryButton = styled.li`
     font-size: 0.9rem; // Tamaño de fuente más pequeño en móviles
   }
 `;
+
 const Divlogo = styled.div`
-display: flex;
-justify-content: start;
-flex-grow: 0.5;
+  display: flex;
+  justify-content: start;
+  flex-grow: 0.5;
   @media (max-width: 768px) {
-flex-grow: 0.9;
+    flex-grow: 0.9;
   }
   @media (max-width: 425px) {
-flex-grow: 0.8;
+    flex-grow: 0.8;
   }
-`
-function Navbar({ selectedCategory, setSelectedCategory }) {
+`;
+const StyledButton = styled.button`
+  display: flex; /* Utiliza flexbox para alinear elementos en una línea */
+  align-items: center; /* Centra verticalmente los elementos */
+  color: inherit; /* Hereda el color del elemento padre */
+  background-color: transparent; /* Fondo transparente, o ajusta según necesites */
+  border: none; /* Sin borde, ajusta según necesites */
+  cursor: pointer; /* Cambia el cursor al pasar el mouse */
+  text-transform: uppercase;
+  span {
+    margin-right: 8px; /* Espacio entre elementos, ajusta el tamaño según sea necesario */
+  }
+  i {
+    margin-right: 2px;
+  }
+
+  &:hover {
+    color: fuchsia; /* Cambia el color al hacer hover */
+  }
+`;
+function Navbar({
+  selectedCategory,
+  setSelectedCategory,
+  userId,
+  handleLogout,
+  userName,
+}) {
+  const internalLogout = () => {
+    // Aquí podrías agregar la lógica adicional que necesites antes de cerrar sesión
+    console.log("Cerrando sesión internamente...");
+    handleLogout(); // Llamar a la función de cierre de sesión pasada como prop
+  };
   const [categories, setCategories] = useState([]);
-  const [menuOpen, setMenuOpen] = useState(false); // Estado para manejar el menú
+  const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -175,13 +219,7 @@ function Navbar({ selectedCategory, setSelectedCategory }) {
   return (
     <NavbarContainer>
       <div className="d-flex align-items-center" style={{ width: "100%" }}>
-        {" "}
-        {/* Alinea verticalmente el contenido */}
-        <Divlogo
-         
-        >
-          {" "}
-          {/* Permite que el logo use todo el espacio disponible */}
+        <Divlogo>
           <Logo
             src={LogoImage}
             alt="ALESKA Logo"
@@ -197,7 +235,6 @@ function Navbar({ selectedCategory, setSelectedCategory }) {
         </Hamburger>
         <div className="d-flex justify-content-center">
           <NavLinks>
-            {/* Mostrar enlaces en la vista de escritorio */}
             {!isProductsPage ? (
               <>
                 <NavItem>
@@ -238,15 +275,32 @@ function Navbar({ selectedCategory, setSelectedCategory }) {
                     Contact
                   </NavLink>
                 </NavItem>
-                <NavItem>
-                  <NavLink
-                    to="/login"
-                    onClick={closeMenu}
-                    className={location.pathname === "/login" ? "active" : ""}
-                  >
-                    Login
-                  </NavLink>
-                </NavItem>
+                {userId ? (
+                  <NavItem style={{ display: "flex" }}>
+                    <StyledButton onClick={internalLogout}>
+                      <i
+                        className="fa-regular fa-user"
+                        style={{ marginLeft: "14px" }}
+                      ></i>
+                      <span style={{ marginLeft: "8.5px" }}>Logout</span>
+                    </StyledButton>
+                    <span>{userName}</span>
+                  </NavItem>
+                ) : (
+                  <NavItem>
+                    <NavLink
+                      to="/login"
+                      onClick={closeMenu}
+                      className={location.pathname === "/login" ? "active" : ""}
+                    >
+                      Login
+                      <i
+                        class="fa-regular fa-user"
+                        style={{ marginLeft: "14px" }}
+                      ></i>
+                    </NavLink>
+                  </NavItem>
+                )}
               </>
             ) : (
               <CategoriesContainer>
@@ -285,16 +339,39 @@ function Navbar({ selectedCategory, setSelectedCategory }) {
                     {category}
                   </CategoryButton>
                 ))}
-                <CategoryButton
-                  className={`${selectedCategory === "login" ? "active" : ""}`}
-                  onClick={() => {
-                    setSelectedCategory("all");
-                    navigate("/login"); // Redirigir a la página de productos
-                    closeMenu();
-                  }}
-                >
-                  Login
-                </CategoryButton>
+                {userId ? (
+                  <CategoryButton
+                    className={`${
+                      selectedCategory === "logout" ? "active" : ""
+                    }`} // Cerrar sesión
+                  >
+                    <StyledButton onClick={internalLogout}>
+                      <i
+                        className="fa-regular fa-user"
+                        style={{ marginLeft: "14px" }}
+                      ></i>
+                      <span style={{ marginLeft: "8.5px" }}>Logout</span>
+                    </StyledButton>
+                    <span>{userName}</span>
+                  </CategoryButton>
+                ) : (
+                  <CategoryButton
+                    className={`${
+                      selectedCategory === "login" ? "active" : ""
+                    }`}
+                    onClick={() => {
+                      setSelectedCategory("all");
+                      navigate("/login"); // Redirigir a la página de login
+                      closeMenu();
+                    }}
+                  >
+                    Login
+                    <i
+                      class="fa-regular fa-user"
+                      style={{ marginLeft: "14px" }}
+                    ></i>
+                  </CategoryButton>
+                )}
               </CategoriesContainer>
             )}
           </NavLinks>
@@ -337,50 +414,69 @@ function Navbar({ selectedCategory, setSelectedCategory }) {
                 {category}
               </CategoryButton>
             ))}
-            <CategoryButton
-              className={`${selectedCategory === "login" ? "active" : ""}`}
-              onClick={() => {
-                setSelectedCategory("all");
-                navigate("/login"); // Redirigir a la página de productos
-                closeMenu();
-              }}
-            >
-              Login
-            </CategoryButton>
+            {userId ? (
+              <CategoryButton
+                className={`${selectedCategory === "logout" ? "active" : ""}`}
+                onClick={internalLogout} // Cerrar sesión
+              >
+                <StyledButton onClick={internalLogout}>
+                  <i
+                    className="fa-regular fa-user"
+                    style={{ marginLeft: "14px" }}
+                  ></i>
+                  <span style={{ marginLeft: "8.5px" }}>Logout</span>
+                </StyledButton>
+                <span>{userName}</span>
+              </CategoryButton>
+            ) : (
+              <CategoryButton
+                className={`${selectedCategory === "login" ? "active" : ""}`}
+                onClick={() => {
+                  setSelectedCategory("all");
+                  navigate("/login"); // Redirigir a la página de login
+                  closeMenu();
+                }}
+              >
+                Login
+                <i
+                  className="fa-regular fa-user"
+                  style={{ marginLeft: "14px" }}
+                ></i>
+              </CategoryButton>
+            )}
           </CategoriesContainer>
         ) : (
-          // Mostrar enlaces de navegación en la vista móvil
-          <CategoriesContainer>
-            <NavItem>
-              <NavLink
-                to="/"
-                onClick={closeMenu}
-                className={location.pathname === "/" ? "active" : ""}
-              >
-                Home
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink
-                to="/products"
-                onClick={closeMenu}
-                className={
-                  location.pathname.startsWith("/products") ? "active" : ""
-                }
-              >
-                Productos
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink
-                to="/about"
-                onClick={closeMenu}
-                className={location.pathname === "/about" ? "active" : ""}
-              >
-                About
-              </NavLink>
-            </NavItem>
-            <NavItem>
+          <NavLinksContainer>
+            <NavLinks>
+              <NavItem>
+                <NavLink
+                  to="/"
+                  onClick={closeMenu}
+                  className={location.pathname === "/" ? "active" : ""}
+                >
+                  Home
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink
+                  to="/products"
+                  onClick={closeMenu}
+                  className={
+                    location.pathname.startsWith("/products") ? "active" : ""
+                  }
+                >
+                  Productos
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink
+                  to="/about"
+                  onClick={closeMenu}
+                  className={location.pathname === "/about" ? "active" : ""}
+                >
+                  About
+                </NavLink>
+              </NavItem>
               <NavLink
                 to="/contact"
                 onClick={closeMenu}
@@ -388,17 +484,36 @@ function Navbar({ selectedCategory, setSelectedCategory }) {
               >
                 Contact
               </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink
-                to="/login"
-                onClick={closeMenu}
-                className={location.pathname === "/login" ? "active" : ""}
-              >
-                Login
-              </NavLink>
-            </NavItem>
-          </CategoriesContainer>
+              {userId ? (
+                <NavItem>
+                  <span>{userName}</span>
+
+                  <StyledButton onClick={internalLogout}>
+                    <i
+                      className="fa-regular fa-user"
+                      style={{ marginLeft: "14px" }}
+                    ></i>
+                    <span style={{ marginLeft: "8.5px" }}>Logout</span>
+                  </StyledButton>
+                  <span>{userName}</span>
+                </NavItem>
+              ) : (
+                <NavItem>
+                  <NavLink
+                    to="/login"
+                    onClick={closeMenu}
+                    className={location.pathname === "/login" ? "active" : ""}
+                  >
+                    Login
+                    <i
+                      className="fa-regular fa-user"
+                      style={{ marginLeft: "14px" }}
+                    ></i>
+                  </NavLink>
+                </NavItem>
+              )}
+            </NavLinks>
+          </NavLinksContainer>
         )}
       </MobileMenu>
     </NavbarContainer>
