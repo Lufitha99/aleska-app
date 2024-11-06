@@ -50,7 +50,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />} />
         <Route path="/products" element={<ProductsList setFavorites={setFavorites} favorites={favorites} userId={userId} addToCart={addToCart} />} />
-        <Route path="/product/:id" element={<ProductDetail />} />
+        <Route path="/product/:id/:category" element={<ProductDetail userId={userId} addToCart={addToCart} />} />
         <Route path="/products/:categoryName" element={<ProductsList setFavorites={setFavorites} favorites={favorites} userId={userId} addToCart={addToCart} />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />

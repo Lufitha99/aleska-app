@@ -8,27 +8,30 @@
   border-radius: 10px;
   box-shadow: 0px 4px 8px #ff8bf31a;
     
-    background-color:#fedbfe ;
 }
 
 
 .contact-hero {
     font-size: 2.5rem;
-    color: #f5a3f5;
+    color: #d291bc;
     margin-bottom: 0.5rem;
     text-align: center;
 }
 
 .contact-hero h1 {
     font-size: 2.5rem;
-    font-weight: 700;
-    color: #fc9df9;
+    font-weight: 100;
+    color: #d291bc;
+    font-family: 'Abril Fatface', sans-serif;
 }
 
 .contact-hero p {
     font-size: 1.2rem;
   color: #555;
   text-align: center;
+  font-family: 'Bacasime Antique', serif;
+  font-weight: 600;
+
 }
 
 
@@ -62,39 +65,49 @@
 
 .contact-title {
     font-size: 1.8rem;
-    font-weight: 600;
-    color: #f27ecf;
+    font-weight: 100;
+    color: #d291bc;
     margin-bottom: 1rem;
     text-align: center;
+    font-family: 'Abril Fatface', sans-serif;
 }
 
 .contact-text {
     font-size: 1rem;
-    color:d291bc;
+    color:#d291bc;
     margin-bottom: 1rem;
+    font-family: "Aboreto", sans-serif;
+    font-weight: 600;
 }
 
 .contact-list {
     list-style: none;
     padding: 0;
+    font-family: 'Bacasime Antique', serif;
+    font-weight: 600;
 }
 
 .contact-list li {
     font-size: 1rem;
     color: #070707;
     margin-bottom: 0.5rem;
+
 }
 
 .contact-form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    font-family: 'Bacasime Antique', serif;
+    font-weight: 600;
 }
 
 .contact-label {
     font-size: 1rem;
     font-weight: 500;
     color: #333;
+    font-family: 'Bacasime Antique', serif;
+    font-weight: 600;
 }
 
 .contact-input, .contact-textarea {
@@ -104,6 +117,8 @@
     border-radius: 4px;
     width: 100%;
     box-sizing: border-box;
+    font-family: 'Bacasime Antique', serif;
+    font-weight: 600;
 }
 
 .contact-textarea {

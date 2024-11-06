@@ -102,7 +102,7 @@ const ProductsList = ({ setFavorites, favorites,userId, addToCart  }) => {
                   alt={product.title}
                   className="card-img-top product-image"
                 />
-                <Link to={`/product/${product.id}`}>
+                <Link to={`/product/${product.id}/${product.category}`}>
                   <button
                     className={`btn m-2 ${styles.btnDetail}`}
                     title="Detail"

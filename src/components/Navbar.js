@@ -110,9 +110,16 @@ const CategoriesContainer = styled.ul`
   gap: 1rem;
   text-align: center;
   margin: 0;
+  text-transform: uppercase;
 
   @media (max-width: 768px) {
     flex-direction: column;
+        list-style: none;
+    display: flex;
+    gap: 1rem;
+    text-align: center;
+    margin: 0;
+    text-transform: uppercase;
   }
 `;
 const NavLinksContainer = styled.ul`
@@ -121,6 +128,7 @@ const NavLinksContainer = styled.ul`
   gap: 1rem;
   text-align: center;
   margin: 0;
+  text-transform: uppercase;
   ul {
     display: flex;
   }
@@ -139,7 +147,6 @@ const CategoryButton = styled.li`
   font-weight: 300;
   transition: color 0.3s ease;
   text-transform: uppercase;
-
   &.active,
   &:hover {
     color: fuchsia;
@@ -180,7 +187,47 @@ const StyledButton = styled.button`
   &:hover {
     color: fuchsia; /* Cambia el color al hacer hover */
   }
+  p {
+    margin: 0;
+    color: #ffffff;
+  }
+  @media (max-width: 768px) {
+    p {
+      display: none;
+    }
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    margin-left: 11%;
+
+    
+    width: max-content;
+    margin: 16% 11% 4% -1%;
+  }
+  @media (max-width: 425px) {
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    margin: 12% 11% 4% 28%;
+
+  }
 `;
+const SpanMensaje = styled.span`
+  marginleft: 8.5px;
+
+  @media (max-width: 768px) {
+    marginleft: 1.5px;
+  }
+  @media (max-width: 425px) {
+    marginleft: 0.5px;
+  }
+`;
+const categoryMapping = {
+  Electrónica: "electronics",
+  Joyería: "jewelery",
+  Hombres: "men's clothing",
+  Mujeres: "women's clothing",
+};
 function Navbar({
   selectedCategory,
   setSelectedCategory,
@@ -202,31 +249,15 @@ function Navbar({
     const fetchCategories = async () => {
       try {
         const data = await getAllCategories();
-        // Verifica si los datos están vacíos o no son un arreglo
         if (data && Array.isArray(data) && data.length > 0) {
-          setCategories(data);
+          setCategories(data.map((cat) => categoryMapping[cat] || cat));
         } else {
-          // Si la respuesta es inválida o vacía, usa un array estático
-          const defaultCategories = [
-            "electronics",
-            "jewelery",
-            "men's clothing",
-            "women's clothing"
-          ];
-          setCategories(defaultCategories);
+          setCategories(Object.keys(categoryMapping));
         }
       } catch (error) {
-        // En caso de error, también usa las categorías estáticas
-        const defaultCategories = [
-          "electronics",
-          "jewelery",
-          "men's clothing",
-          "women's clothing"
-        ];
-        setCategories(defaultCategories);
+        setCategories(Object.keys(categoryMapping));
       }
     };
-
     fetchCategories();
   }, []);
   const isProductsPage = location.pathname.startsWith("/products");
@@ -266,7 +297,7 @@ function Navbar({
                     onClick={closeMenu}
                     className={location.pathname === "/" ? "active" : ""}
                   >
-                    Home
+                    Inicio
                   </NavLink>
                 </NavItem>
                 <NavItem>
@@ -286,7 +317,7 @@ function Navbar({
                     onClick={closeMenu}
                     className={location.pathname === "/about" ? "active" : ""}
                   >
-                    About
+                    Sobre nosotros
                   </NavLink>
                 </NavItem>
                 <NavItem>
@@ -295,19 +326,19 @@ function Navbar({
                     onClick={closeMenu}
                     className={location.pathname === "/contact" ? "active" : ""}
                   >
-                    Contact
+                    Contacto
                   </NavLink>
                 </NavItem>
                 {userId ? (
                   <NavItem style={{ display: "flex" }}>
+                    <p style={{marginBottom: '0',color: '#fffefe'}}>{userName}</p>
                     <StyledButton onClick={internalLogout}>
                       <i
                         className="fa-regular fa-user"
                         style={{ marginLeft: "14px" }}
                       ></i>
-                      <span style={{ marginLeft: "8.5px" }}>Logout</span>
+                      <SpanMensaje>Cerrar sesión</SpanMensaje>
                     </StyledButton>
-                    <span>{userName}</span>
                   </NavItem>
                 ) : (
                   <NavItem>
@@ -316,7 +347,7 @@ function Navbar({
                       onClick={closeMenu}
                       className={location.pathname === "/login" ? "active" : ""}
                     >
-                      Login
+                      Iniciar sesión
                       <i
                         className="fa-regular fa-user"
                         style={{ marginLeft: "14px" }}
@@ -335,7 +366,7 @@ function Navbar({
                     closeMenu();
                   }}
                 >
-                  Home
+                  Inicio
                 </CategoryButton>
                 <CategoryButton
                   className={`${selectedCategory === "all" ? "active" : ""}`}
@@ -345,7 +376,7 @@ function Navbar({
                     closeMenu();
                   }}
                 >
-                  All
+                  Todos
                 </CategoryButton>
                 {categories.map((category) => (
                   <CategoryButton
@@ -355,8 +386,7 @@ function Navbar({
                     }`}
                     onClick={() => {
                       setSelectedCategory(category);
-                      navigate(`/products/${category}`); // Redirigir a la categoría seleccionada
-                      closeMenu();
+                      navigate(`/products/${categoryMapping[category]}`);
                     }}
                   >
                     {category}
@@ -368,14 +398,14 @@ function Navbar({
                       selectedCategory === "logout" ? "active" : ""
                     }`} // Cerrar sesión
                   >
+                    <p style={{marginBottom: '0',color: '#fffefe'}}>{userName}</p>
                     <StyledButton onClick={internalLogout}>
                       <i
                         className="fa-regular fa-user"
                         style={{ marginLeft: "14px" }}
                       ></i>
-                      <span style={{ marginLeft: "8.5px" }}>Logout</span>
+                      <SpanMensaje>Cerrar sesión</SpanMensaje>
                     </StyledButton>
-                    <span>{userName}</span>
                   </CategoryButton>
                 ) : (
                   <CategoryButton
@@ -388,7 +418,7 @@ function Navbar({
                       closeMenu();
                     }}
                   >
-                    Login
+                    Iniciar sesión
                     <i
                       className="fa-regular fa-user"
                       style={{ marginLeft: "14px" }}
@@ -412,7 +442,7 @@ function Navbar({
                 closeMenu();
               }}
             >
-              Home
+              Inicio
             </CategoryButton>
             <CategoryButton
               className={`${selectedCategory === "all" ? "active" : ""}`}
@@ -422,7 +452,7 @@ function Navbar({
                 closeMenu();
               }}
             >
-              All
+              Todos
             </CategoryButton>
             {categories.map((category) => (
               <CategoryButton
@@ -430,11 +460,13 @@ function Navbar({
                 className={`${selectedCategory === category ? "active" : ""}`}
                 onClick={() => {
                   setSelectedCategory(category);
-                  navigate(`/products/${category}`); // Redirigir a la categoría seleccionada
+                  // Usa el mapeo para obtener la URL en inglés
+                  const englishCategory = categoryMapping[category];
+                  navigate(`/products/${englishCategory}`); // Redirige a la categoría en inglés
                   closeMenu();
                 }}
               >
-                {category}
+                {category} {/* Esto mostrará el nombre en español */}
               </CategoryButton>
             ))}
             {userId ? (
@@ -442,14 +474,14 @@ function Navbar({
                 className={`${selectedCategory === "logout" ? "active" : ""}`}
                 onClick={internalLogout} // Cerrar sesión
               >
+                <p style={{marginBottom: '0',color: '#fffefe'}}>{userName}</p>
                 <StyledButton onClick={internalLogout}>
                   <i
                     className="fa-regular fa-user"
                     style={{ marginLeft: "14px" }}
                   ></i>
-                  <span style={{ marginLeft: "8.5px" }}>Logout</span>
+                  <SpanMensaje>Cerrar sesión</SpanMensaje>
                 </StyledButton>
-                <span>{userName}</span>
               </CategoryButton>
             ) : (
               <CategoryButton
@@ -460,7 +492,7 @@ function Navbar({
                   closeMenu();
                 }}
               >
-                Login
+                Iniciar sesión
                 <i
                   className="fa-regular fa-user"
                   style={{ marginLeft: "14px" }}
@@ -477,7 +509,7 @@ function Navbar({
                   onClick={closeMenu}
                   className={location.pathname === "/" ? "active" : ""}
                 >
-                  Home
+                  Inicio
                 </NavLink>
               </NavItem>
               <NavItem>
@@ -497,28 +529,28 @@ function Navbar({
                   onClick={closeMenu}
                   className={location.pathname === "/about" ? "active" : ""}
                 >
-                  About
+                  Sobre nosotros
                 </NavLink>
               </NavItem>
-              <NavLink
-                to="/contact"
-                onClick={closeMenu}
-                className={location.pathname === "/contact" ? "active" : ""}
-              >
-                Contact
-              </NavLink>
+              <NavItem>
+                <NavLink
+                  to="/contact"
+                  onClick={closeMenu}
+                  className={location.pathname === "/contact" ? "active" : ""}
+                >
+                  Contacto
+                </NavLink>
+              </NavItem>
               {userId ? (
                 <NavItem>
-                  <span>{userName}</span>
-
+                  <p style={{marginBottom: '0',color: '#fffefe'}}>{userName}</p>
                   <StyledButton onClick={internalLogout}>
                     <i
                       className="fa-regular fa-user"
                       style={{ marginLeft: "14px" }}
                     ></i>
-                    <span style={{ marginLeft: "8.5px" }}>Logout</span>
+                    <SpanMensaje>Cerrar sesión</SpanMensaje>
                   </StyledButton>
-                  <span>{userName}</span>
                 </NavItem>
               ) : (
                 <NavItem>
@@ -527,7 +559,7 @@ function Navbar({
                     onClick={closeMenu}
                     className={location.pathname === "/login" ? "active" : ""}
                   >
-                    Login
+                    Iniciar sesión
                     <i
                       className="fa-regular fa-user"
                       style={{ marginLeft: "14px" }}
