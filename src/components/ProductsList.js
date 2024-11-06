@@ -95,6 +95,7 @@ const ProductsList = ({ setFavorites, favorites,userId, addToCart  }) => {
       <div className="row">
         {paginatedProducts.map((product) => (
           <div className="col-md-4 mb-4" key={product.id}>
+
             <div className={`card h-100 product-container ${styles.card}`}>
               <div className="image-container">
                 <img
@@ -102,7 +103,7 @@ const ProductsList = ({ setFavorites, favorites,userId, addToCart  }) => {
                   alt={product.title}
                   className="card-img-top product-image"
                 />
-                <Link to={`/product/${product.id}`}>
+                <Link to={`/product/${product.id}/${product.category}`}>
                   <button
                     className={`btn m-2 ${styles.btnDetail}`}
                     title="Detail"
