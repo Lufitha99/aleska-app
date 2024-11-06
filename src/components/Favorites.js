@@ -33,13 +33,12 @@ const RemoveButton = styled.button`
 `;
 
 const BackButton = styled.button`
-  display: flex;
-  padding: 10px 15px;
-  background-color: #333;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  margin-top: 20px;
+   background-color: #ff69b4;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    color: white;
+    border-radius: 10px;
 
   &:hover {
     background-color: #555;
@@ -66,7 +65,7 @@ const Favorites = ({ favorites, setFavorites }) => {
     <FavoritesContainer>
       <FlexContainer>
         <h3>Favoritos</h3>
-        <BackButton onClick={handleBackToProducts}>Volver a Productos</BackButton>
+        <BackButton onClick={handleBackToProducts}><i class="fa-solid fa-circle-left"></i>Volver</BackButton>
       </FlexContainer>
       {favorites.length ? (
         favorites.map((product) => (

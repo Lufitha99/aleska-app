@@ -6,7 +6,7 @@ import { createUser, getUserById } from "../api/Users";
 import { useNavigate, useLocation } from "react-router-dom";
 const Container = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,6 +23,9 @@ const SignupContainer = styled.div`
   border: 1px solid #ddd;
   overflow: hidden;
   border-radius: 8px;
+    @media (max-width: 1024px) {
+    width: 75%;
+  }
   @media (max-width: 768px) {
     flex-direction: column;  // Cambiar la dirección a columna en pantallas pequeñas
     width: 100%;
@@ -34,8 +37,10 @@ const FormContainer = styled.div`
   flex-direction: row;
   flex: 1;
   padding: 10px;
-  height: 67vh;
-
+  
+    @media (max-width: 1024px) {
+    height: auto; // Ajustar altura para móviles
+  }
   @media (max-width: 768px) {
     flex-direction: column; // Cambiar la dirección a columna en pantallas pequeñas
     padding: 10px;
@@ -113,6 +118,17 @@ const FormImageContainer = styled.div`
   @media (max-width: 768px) {
     display: none; // Oculta el contenedor de la imagen en pantallas móviles
   }
+@media (min-width: 769px) and (max-width: 1440px) {
+  img {
+    height: 87vh;
+  }
+}
+
+@media (min-width: 1441px) and (max-width: 2560px) {
+  img {
+    height: 67vh;
+  }
+}
 `;
 
 const SignUpForm = ({ onRegister }) => {
@@ -197,7 +213,7 @@ const SignUpForm = ({ onRegister }) => {
           </SignupFormStyled>
         </FormContainer>
         <FormImageContainer>
-          <img src={Form} alt="model" style={{height: "67vh"}}/>
+          <img src={Form} alt="model"/>
         </FormImageContainer>
       </SignupContainer>
     </Container>

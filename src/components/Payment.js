@@ -12,12 +12,12 @@ const FlexContainer = styled.div`
 `;
 
 const BackButton = styled.button`
-  display: flex;
-  padding: 10px 15px;
-  background-color: #333;
-  color: white;
-  border: none;
-  border-radius: 5px;
+   background-color: #ff69b4;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    color: white;
+    border-radius: 10px;
 
   &:hover {
     background-color: #555;
@@ -57,7 +57,7 @@ const CartUser = ({ cart, removeFromCart, userId }) => {
     <div className={`${styles.container} mt-5`}>
       <FlexContainer>
         <h2>Carrito de Compras</h2>
-        <BackButton onClick={handleBackToProducts}>Volver a Productos</BackButton>
+        <BackButton onClick={handleBackToProducts}><i class="fa-solid fa-circle-left"></i>Volver</BackButton>
       </FlexContainer>
       <ul className={styles.productList}>
         {cart.map((product) => (
