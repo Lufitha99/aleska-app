@@ -200,12 +200,35 @@ function Navbar({
 
   useEffect(() => {
     const fetchCategories = async () => {
-      const data = await getAllCategories();
-      setCategories(data);
+      try {
+        const data = await getAllCategories();
+        // Verifica si los datos están vacíos o no son un arreglo
+        if (data && Array.isArray(data) && data.length > 0) {
+          setCategories(data);
+        } else {
+          // Si la respuesta es inválida o vacía, usa un array estático
+          const defaultCategories = [
+            "electronics",
+            "jewelery",
+            "men's clothing",
+            "women's clothing"
+          ];
+          setCategories(defaultCategories);
+        }
+      } catch (error) {
+        // En caso de error, también usa las categorías estáticas
+        const defaultCategories = [
+          "electronics",
+          "jewelery",
+          "men's clothing",
+          "women's clothing"
+        ];
+        setCategories(defaultCategories);
+      }
     };
+
     fetchCategories();
   }, []);
-
   const isProductsPage = location.pathname.startsWith("/products");
 
   const toggleMenu = () => {
