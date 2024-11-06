@@ -199,7 +199,7 @@ const SignUpForm = ({ onRegister }) => {
                 <InputGroup key={key}>
                   <label>{key.charAt(0).toUpperCase() + key.slice(1)}*</label>
                   <Input
-                    type={key === "password" ? "password" : "text"}
+                    type={key === "contraseña" ? "password" : "text"}
                     name={key}
                     value={value}
                     placeholder={`${key.charAt(0).toUpperCase() + key.slice(1)}*`}
