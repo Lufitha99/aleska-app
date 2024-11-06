@@ -295,7 +295,7 @@ function Navbar({
                     >
                       Login
                       <i
-                        class="fa-regular fa-user"
+                        className="fa-regular fa-user"
                         style={{ marginLeft: "14px" }}
                       ></i>
                     </NavLink>
@@ -367,7 +367,7 @@ function Navbar({
                   >
                     Login
                     <i
-                      class="fa-regular fa-user"
+                      className="fa-regular fa-user"
                       style={{ marginLeft: "14px" }}
                     ></i>
                   </CategoryButton>
