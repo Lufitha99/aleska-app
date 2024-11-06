@@ -21,6 +21,8 @@ const App = () => {
         <Route path="/products" element={<ProductsList selectedCategory={selectedCategory} />} />
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/about" element={<About />} /> 
+        <Route path="/product/:id/:category" element={<ProductDetail />}  />
+
       </Routes>
     </Router>
   );
