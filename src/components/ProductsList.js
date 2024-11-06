@@ -9,8 +9,8 @@ const ProductsList = ({ setFavorites, favorites,userId, addToCart  }) => {
   const [products, setProducts] = useState([]);
   const [displayedProducts, setDisplayedProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
-  const [message, setMessage] = useState(""); // Estado para el mensaje
-  const [showMessage, setShowMessage] = useState(false); // Estado para controlar la visibilidad del mensaje
+  const [message, setMessage] = useState(""); 
+  const [showMessage, setShowMessage] = useState(false); 
   const [cartItems, setCartItems] = useState([]);
   const itemsPerPage = 6;
 
@@ -58,23 +58,25 @@ const ProductsList = ({ setFavorites, favorites,userId, addToCart  }) => {
   const handleAddToFavorites = (product) => {
     setFavorites((prevFavorites) => {
       if (!prevFavorites.some((fav) => fav.id === product.id)) {
-        // Mostrar mensaje al añadir a favoritos
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         setMessage(`"${product.title}" ha sido añadido a favoritos.`);
         setShowMessage(true);
-        setTimeout(() => setShowMessage(false), 3000); // Ocultar el mensaje después de 3 segundos
+        setTimeout(() => setShowMessage(false), 3000); 
         return [...prevFavorites, product];
       }
-      return prevFavorites; // No añadir si ya está en favoritos
+      return prevFavorites; 
     });
   };
   const handleAddProductToCart = (product) => {
     if (userId) {
-      addToCart(product); // Añade el producto al carrito
+      addToCart(product); 
       setCartItems((prevItems) => [...prevItems, product]);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       setMessage(`"${product.title}" ha sido añadido al carrito.`);
       setShowMessage(true);
       setTimeout(() => setShowMessage(false), 3000); 
     } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       setMessage("Debes estar logueado para agregar productos al carrito.");
       setShowMessage(true);
       setTimeout(() => setShowMessage(false), 3000); 
@@ -85,7 +87,7 @@ const ProductsList = ({ setFavorites, favorites,userId, addToCart  }) => {
     <div className={`${styles.containerProduct} mt-5 text-center`}>
       <SearchBar products={products} onSearchResults={handleSearchResults} favorites={favorites.length} userId={userId} cartItemsCount={cartItems.length} />
       
-      {/* Mensaje de éxito */}
+  
       {showMessage && (
         <div className="alert alert-success" role="alert">
           {message}
@@ -95,7 +97,6 @@ const ProductsList = ({ setFavorites, favorites,userId, addToCart  }) => {
       <div className="row">
         {paginatedProducts.map((product) => (
           <div className="col-md-4 mb-4" key={product.id}>
-
             <div className={`card h-100 product-container ${styles.card}`}>
               <div className="image-container">
                 <img

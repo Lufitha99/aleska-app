@@ -50,7 +50,6 @@ const CartUser = ({ cart, removeFromCart, userId }) => {
       confirmButtonText: 'Aceptar',
     });
 
-    // Aquí puedes agregar más lógica si es necesario
   };
 
   return (

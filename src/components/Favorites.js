@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom'; // Importa useNavigate
+import { useNavigate } from 'react-router-dom'; 
 
 const FavoritesContainer = styled.div`
   margin: 20px;
@@ -46,19 +46,19 @@ const BackButton = styled.button`
 `;
 const FlexContainer = styled.div`
   display: flex;
-  justify-content: space-between; // Alinea los elementos en los extremos
-  align-items: center; // Centra verticalmente los elementos
-  margin-bottom: 20px; // Espacio en la parte inferior si es necesario
+  justify-content: space-between; 
+  align-items: center; 
+  margin-bottom: 20px; 
 `;
 const Favorites = ({ favorites, setFavorites }) => {
-  const navigate = useNavigate(); // Usamos useNavigate para redirigir
+  const navigate = useNavigate(); 
 
   const handleRemoveFromFavorites = (productId) => {
     setFavorites((prevFavorites) => prevFavorites.filter((fav) => fav.id !== productId));
   };
 
   const handleBackToProducts = () => {
-    navigate("/products"); // Redirige a la página de productos
+    navigate("/products"); 
   };
 
   return (
@@ -83,7 +83,6 @@ const Favorites = ({ favorites, setFavorites }) => {
       ) : (
         <p>No tienes productos en favoritos.</p>
       )}
-      {/* Botón para volver a productos */}
     </FavoritesContainer>
   );
 };

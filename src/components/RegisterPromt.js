@@ -9,7 +9,7 @@ function RegisterPrompt() {
 
   const handleRegister = () => {
     console.log("Registro con correo:", email);
-    // Navegar al componente Signup y pasar el correo como parte del estado
+
     navigate("/signup", { state: { email } });
   };
 

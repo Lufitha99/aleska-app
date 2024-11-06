@@ -27,7 +27,7 @@ const SignupContainer = styled.div`
     width: 75%;
   }
   @media (max-width: 768px) {
-    flex-direction: column;  // Cambiar la dirección a columna en pantallas pequeñas
+    flex-direction: column;  
     width: 100%;
   }
 `;
@@ -39,12 +39,12 @@ const FormContainer = styled.div`
   padding: 10px;
   
     @media (max-width: 1024px) {
-    height: auto; // Ajustar altura para móviles
+    height: auto; 
   }
   @media (max-width: 768px) {
-    flex-direction: column; // Cambiar la dirección a columna en pantallas pequeñas
+    flex-direction: column; 
     padding: 10px;
-    height: auto; // Ajustar altura para móviles
+    height: auto;
   }
 `;
 
@@ -75,7 +75,7 @@ const FormGrid = styled.div`
   gap: 15px;
 
   @media (max-width: 768px) {
-    grid-template-columns: 1fr; // Para pantallas pequeñas, mostrar solo una columna
+    grid-template-columns: 1fr; 
     gap: 10px;
   }
 `;

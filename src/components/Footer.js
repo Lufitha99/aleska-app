@@ -19,7 +19,6 @@ function Footer() {
             contacto@aleskastore.com
           </p>
         </div>
-              {/* Sección de horario centrada */}
       <div style={styles.horarioSection}>
       <h2 style={styles.title}>Síguenos</h2>
           <div style={styles.socialIcons}>
@@ -65,25 +64,25 @@ const styles = {
     },
     container: {
       display: "flex",
-      flexDirection: "nowrap", // Cambiar a columna para móviles
-      alignItems: "center", // Centramos el contenido
+      flexDirection: "nowrap", 
+      alignItems: "center", 
       justifyContent: "space-around",
       flexWrap: "wrap",
     },
     infoSection: {
       flex: "1 1 300px",
       margin: "10px",
-      textAlign: "left", // Alinear texto a la izquierda
+      textAlign: "left", 
     },
     socialSection: {
       flex: "1 1 300px",
       margin: "10px",
-      textAlign: "center", // Centrar íconos sociales
+      textAlign: "center", 
     },
     horarioSection: {
       flex: "1 1 300px",
       margin: "10px",
-      textAlign: "center", // Centramos la sección de horario
+      textAlign: "center", 
     },
     title: {
       fontFamily: "'Abril Fatface', sans-serif",
@@ -113,7 +112,7 @@ const styles = {
       fontSize: "0.9rem",
     },
     horarioInfo: {
-      margin: "10px 0", // Espaciado para la información de horario
+      margin: "10px 0",
     },
   };
   

@@ -2,7 +2,7 @@ import React from "react";
 import styles from "../styles/Cart.module.css";
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom'; 
-import Swal from 'sweetalert2'; // Asegúrate de haber instalado sweetalert2
+import Swal from 'sweetalert2';
 
 const FlexContainer = styled.div`
   display: flex;
