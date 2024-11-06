@@ -11,6 +11,7 @@ import SignUpForm from "./components/SignupForm";
 import Favorites from "./components/Favorites";
 import CartUser from "./components/CartUser";
 import ScrollToTop from "./components/ScrollTop";
+import Contact from "./components/Contact";
 
 const App = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -52,6 +53,7 @@ const App = () => {
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/products/:categoryName" element={<ProductsList setFavorites={setFavorites} favorites={favorites} userId={userId} addToCart={addToCart} />} />
         <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<LoginC onLogin={handleLogin} />} />
         <Route path="/signup" element={<SignUpForm />} />
         <Route path="/favorites" element={<Favorites setFavorites={setFavorites} favorites={favorites} />} />

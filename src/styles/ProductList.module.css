@@ -91,3 +91,15 @@
   width: auto;
 color: white;
 }
+.btnCart{
+  border: none;
+  position: relative;
+  z-index: 1;
+  background: rgb(252, 236, 146);
+  width: auto;
+color: rgb(0, 0, 0);
+}
+.btnCart:hover {
+  background: rgb(240, 208, 26); /* Fondo más intenso */
+  transform: scale(1.1);
+}
