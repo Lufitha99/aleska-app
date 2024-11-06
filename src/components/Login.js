@@ -57,35 +57,35 @@ const LoginC = ({ onLogin }) => {
         <div className="login-form-container">
           <div className="login-form">
             <img src={Logo} alt="Logo" className="login-logo" />
-            <h2>Log in</h2>
-            <p>Please log in to your account.</p>
+            <h2>Iniciar Sesión</h2>
+            <p>Por favor ingrese con su cuenta.</p>
             <form onSubmit={handleSubmit}>
               <div className="form-group">
-                <label>Username or email*</label>
+                <label>Usuario o correo electrónico*</label>
                 <input 
                   type="text" 
                   value={username} 
                   onChange={(e) => setUsername(e.target.value)} 
-                  placeholder="Username or email" 
+                  placeholder="Usuario o correo electrónico" 
                   required 
                 />
               </div>
               <div className="form-group">
-                <label>Password*</label>
+                <label>Contraseña*</label>
                 <input 
                   type="password" 
                   value={password} 
                   onChange={(e) => setPassword(e.target.value)} 
-                  placeholder="Password" 
+                  placeholder="Contraseña" 
                   required 
                 />
               </div>
-              <button type="submit" className="login-button">Sign In</button>
+              <button type="submit" className="login-button">Iniciar Sesión</button>
             </form>
             <div className="login-links">
-              <button onClick={() => console.log("Forgot password clicked")} className="btn forgot-password">Forgot password?</button>
-              <p>I don’t have an account yet.{" "}
-                <button onClick={handleSignUpClick} className="btn sign-up-link">Sign up</button>
+              <button onClick={() => console.log("Forgot password clicked")} className="btn forgot-password">¿Olvidaste tu Contraseña?</button>
+              <p>Aún no tengo cuenta.{" "}
+                <button onClick={handleSignUpClick} className="btn sign-up-link">Registrarme</button>
               </p>
             </div>
           </div>

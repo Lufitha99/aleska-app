@@ -17,6 +17,7 @@ const Container = styled.div`
 const SignupContainer = styled.div`
   display: flex;
   height: auto;
+  padding: 20px;
   width: 60%;
   max-width: 100%;
   border: 1px solid #ddd;
@@ -32,7 +33,7 @@ const FormContainer = styled.div`
   display: flex;
   flex-direction: row;
   flex: 1;
-  padding: 20px;
+  padding: 10px;
   height: 67vh;
 
   @media (max-width: 768px) {
@@ -75,7 +76,7 @@ const FormGrid = styled.div`
 `;
 
 const InputGroup = styled.div`
-  margin-bottom: 15px;
+  margin-bottom: 12px;
   text-align: left;
 `;
 
@@ -118,11 +119,11 @@ const SignUpForm = ({ onRegister }) => {
   const navigate = useNavigate();
   const location = useLocation(); 
   const [formData, setFormData] = useState({
-    firstname: "",
-    lastname: "",
-    email: location.state?.email || "",
-    username: "",
-    password: "",
+    nombres: "",
+    apellidos: "",
+    correo: location.state?.email || "",
+    usuario: "",
+    contraseña: "",
   });
 
   const handleChange = (e) => {
@@ -157,7 +158,7 @@ const SignUpForm = ({ onRegister }) => {
         },
       });
     } catch (error) {
-      console.error("Error registering user:", error.message);
+      console.error("Error al registrar el  usuario:", error.message);
       await window.Swal.fire({
         title: "Error",
         text: error.message || "No se pudo registrar el usuario. Por favor, intenta nuevamente.",
@@ -174,8 +175,8 @@ const SignUpForm = ({ onRegister }) => {
           <SignupFormStyled onSubmit={handleSubmit}>
             <Header>
               <LogoImage src={Logo} alt="Logo" />
-              <h2>Sign up</h2>
-              <p>Create an account.</p>
+              <h2>Registrarme</h2>
+              <p>Crear una cuenta nueva.</p>
             </Header>
             <FormGrid>
               {Object.entries(formData).map(([key, value]) => (
@@ -192,7 +193,7 @@ const SignUpForm = ({ onRegister }) => {
                 </InputGroup>
               ))}
             </FormGrid>
-            <Button type="submit">Submit</Button>
+            <Button type="submit">Registrarse</Button>
           </SignupFormStyled>
         </FormContainer>
         <FormImageContainer>
