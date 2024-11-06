@@ -1,7 +1,7 @@
 .containerProduct {
-    display: flex; /* Cambia el contenedor a flexbox */
-    flex-wrap: wrap; /* Permite que las tarjetas se ajusten en varias filas */
-    justify-content: center; /* Centra las tarjetas horizontalmente */
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center; 
     padding: 1% 5% 5% 5%;
   }
   
@@ -12,16 +12,16 @@
     justify-content: space-between;
     position: relative;
     overflow: hidden;
-    height: 400px; /* Fija una altura para todas las tarjetas */
-    margin: 10px; /* Espaciado entre tarjetas */
+    height: 400px; 
+    margin: 10px; 
     cursor: pointer;
   }
   
   .card img {
-    object-fit: contain; /* Cambia a contain para que la imagen se ajuste al contenedor sin recortarse */
-    height: 270px; /* Fija una altura para la imagen */
-    width: 100%; /* Que la imagen ocupe todo el ancho */
-    transition: transform 0.3s; /* Transición suave para el efecto de aumento de imagen */
+    object-fit: contain; 
+    height: 270px; 
+    width: 100%; 
+    transition: transform 0.3s; 
   }
   
   .card img:hover {
@@ -47,13 +47,13 @@
     bottom: 40%;
     left: 50%;
     transform: translateX(-50%);
-    display: block; /* Ocultar el icono por defecto */
+    display: block; 
   }
 
   .link {
-    color: inherit; /* Asegúrate de que el icono tenga el mismo color que el texto */
-    text-decoration: none; /* Elimina el subrayado del enlace */
-    font-size: 24px; /* Ajusta el tamaño del icono según tus preferencias */
+    color: inherit; 
+    text-decoration: none; 
+    font-size: 24px; 
   }
   .price{
     background-color: rgba(255, 215, 0, 0.15);
@@ -66,13 +66,13 @@
     width: auto;
   }
   .btnDetail:hover {
-    background-color: #818181!important; /* Asegúrate de que este estilo sea visible */
+    background-color: #818181!important; 
     transform: scale(1.1);
     color: #4d4d4d!important;
 }
 
 .btnFavorite:hover {
-    background-color: #ff748b; /* Color de fondo para el hover */
+    background-color: #ff748b; 
     transform: scale(1.1);
     z-index: 1000;
 }
@@ -100,6 +100,6 @@ color: white;
 color: rgb(0, 0, 0);
 }
 .btnCart:hover {
-  background: rgb(240, 208, 26); /* Fondo más intenso */
+  background: rgb(240, 208, 26); 
   transform: scale(1.1);
 }

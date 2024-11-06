@@ -3,10 +3,9 @@ import { useParams } from "react-router-dom";
 import { getProductById } from "../api/Products";
 import styles from "../styles/ProductDetail.module.css";
  import ProductActions from "./ProductActions";
-import Swal from 'sweetalert2'; // Asegúrate de haber instalado sweetalert2
+import Swal from 'sweetalert2'; 
 import RenderAdditionalOptions from "./RenderAditionalOptions";
 const ProductDetail = ({ addToCart, userId }) => {
-
   const { id, category } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -14,11 +13,9 @@ const ProductDetail = ({ addToCart, userId }) => {
   const [reviews, setReviews] = useState([]);
   const [userRating, setUserRating] = useState(0);
   const [reviewImage, setReviewImage] = useState(null);
-
   const [cartItems, setCartItems] = useState([]);
-  const [message, setMessage] = useState(""); // Estado para el mensaje
-  const [showMessage, setShowMessage] = useState(false); // Estado para controlar la visibilidad del mensaje
-
+  const [message, setMessage] = useState(""); 
+  const [showMessage, setShowMessage] = useState(false); 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -32,6 +29,7 @@ const ProductDetail = ({ addToCart, userId }) => {
     };
     fetchProduct();
   }, [id, category]);
+
   const handleReviewSubmit = (e) => {
     e.preventDefault();
     if (reviewText.trim() === "") return;
@@ -53,7 +51,6 @@ const ProductDetail = ({ addToCart, userId }) => {
     setReviewImage(null);
   };
 
-
   const handleRatingClick = (rating) => {
     setUserRating(rating);
   };
@@ -71,34 +68,40 @@ const ProductDetail = ({ addToCart, userId }) => {
       i === index ? { ...review, [type]: review[type] + 1 } : review
     )));
   };
-
   const handleAddProductToCart = (product) => {
     if (userId) {
       setCartItems((prevItems) => {
         const updatedCartItems = [...prevItems, product];
-        console.log("Cantidad de productos en el carrito:", updatedCartItems.length); // Muestra la cantidad de productos en consola
+        console.log("Cantidad de productos en el carrito:", updatedCartItems.length); 
         return updatedCartItems;
       });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       setMessage(`"${product.title}" ha sido añadido al carrito.`);
       setShowMessage(true);
       setTimeout(() => setShowMessage(false), 3000); 
     } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       setMessage("Debes estar logueado para agregar productos al carrito.");
       setShowMessage(true);
       setTimeout(() => setShowMessage(false), 3000); 
     }
   };
   const handlePayment = async () => {
+    if (userId) {
     await Swal.fire({
       title: 'Pago Confirmado',
       text: 'Los productos llegarán en 7 días hábiles.',
       icon: 'success',
       confirmButtonText: 'Aceptar',
     });
-
+  }else{
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setMessage("Debes estar logueado para comprar.");
+    setShowMessage(true);
+    setTimeout(() => setShowMessage(false), 3000); 
+  }
   };
 
-  // Muestra opciones adicionales según la categoría del producto
   
  
   if (loading) return <p>Cargando detalles...</p>;
@@ -107,7 +110,6 @@ const ProductDetail = ({ addToCart, userId }) => {
   return (
     <div className={styles.container}>
       <div className="row">
-
       <ProductActions userId={userId} cartItemsCount={cartItems.length} />
 
       {showMessage && (
@@ -115,7 +117,6 @@ const ProductDetail = ({ addToCart, userId }) => {
           {message}
         </div>
       )}
-
         <div className="col-md-6 text-center">
           <img
             src={product.image}
@@ -124,25 +125,19 @@ const ProductDetail = ({ addToCart, userId }) => {
           />
         </div>
         <div className="col-md-6">
-
           <h2 className={styles.titleProduct}>{product.title}</h2>
           <p className={styles.price}>${product.price}</p>
-
           <div className={styles.rating}>
             {"★".repeat(Math.round(product.rating.rate))}
             {"☆".repeat(5 - Math.round(product.rating.rate))}
             <span> ({product.rating.count} opiniones)</span>
           </div>
-          <p className={styles.description}><strong>Descripción:</strong> {product.description}</p>
-          
-         
-          {/* Sección de opciones adicionales */}
+          <p className={styles.description}><strong>Descripción:</strong> {product.description}</p>   
+    
           <RenderAdditionalOptions category={category} />
  
-          {/* Información adicional que solicitaste */}
           <p>Categoría: {category}</p>
          
-
           <button
         className={styles.button}
         onClick={handlePayment}
@@ -150,15 +145,12 @@ const ProductDetail = ({ addToCart, userId }) => {
         Comprar
       </button>
           <button className={styles.button} onClick={() => handleAddProductToCart(product)}>Añadir al carrito</button>
-
         </div>
       </div>
  
       <div className="mt-5">
         <h3>Opiniones de Usuarios</h3>
-
         {userId && (
-
         <form onSubmit={handleReviewSubmit} className="mb-4">
           <div className="form-group">
             <textarea
@@ -169,7 +161,6 @@ const ProductDetail = ({ addToCart, userId }) => {
               onChange={(e) => setReviewText(e.target.value)}
             ></textarea>
           </div>
-
          
           <div className="form-group" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <div style={{ display: "flex", alignItems: "center" }}>
@@ -205,7 +196,6 @@ const ProductDetail = ({ addToCart, userId }) => {
         </form>
         )}
   {!userId && <p>Inicia sesión para dejar una reseña.</p>}
-
         <div>
           {reviews.length > 0 ? (
             reviews.map((review, index) => (
@@ -222,12 +212,10 @@ const ProductDetail = ({ addToCart, userId }) => {
                 <small>{review.date.toLocaleString()}</small>
                 <div className="d-flex mt-2">
                   <button onClick={() => handleReaction(index, "likes")} className={styles.reactionButton}>
-
                   <i className="fa-solid fa-thumbs-up"></i> {review.likes}
                   </button>
                   <button onClick={() => handleReaction(index, "dislikes")} className={styles.reactionButton}>
                   <i className="fa-solid fa-thumbs-down"></i> {review.dislikes}
-
                   </button>
                 </div>
               </div>

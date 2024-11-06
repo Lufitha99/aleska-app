@@ -23,7 +23,7 @@ function Testimonial() {
       setCurrentIndex((prevIndex) =>
         prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1
       );
-    }, 5000); // Cambia cada 5 segundos
+    }, 5000); 
 
     return () => clearInterval(intervalId);
   }, [testimonials.length]);

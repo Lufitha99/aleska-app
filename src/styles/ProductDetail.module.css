@@ -91,7 +91,7 @@
   background-color: #0056b3;
 }
 .price {
-  font-size: 3rem; /* Aumenta el tamaño según prefieras */
+  font-size: 3rem; 
   font-weight: 400;
   color: #000000;
   margin-top: 10px;
@@ -100,7 +100,7 @@
   text-align: justify!important;
 }
 .description {
-  font-size: 1.25rem; /* Tamaño de la descripción */
+  font-size: 1.25rem; 
   line-height: 1.6;
   color: #666;
   margin-top: 10px;
@@ -215,4 +215,3 @@ small {
     padding: 15% 8% 8% 8%;
   }
 }
-

@@ -1,6 +1,6 @@
-/* RenderAdditionalOptions.module.css */
+
 .optionButton {
-    /* Estilos básicos de los botones */
+   
     padding: 10px;
     margin: 5px;
     border: 1px solid #ccc;
@@ -9,7 +9,6 @@
   }
   
   .colorCircle {
-    /* Estilos básicos para los botones de color */
     width: 30px;
     height: 30px;
     border-radius: 50%;

@@ -5,13 +5,13 @@ import Testimonial from "./Testimonial";
 import Gallery from "./Gallery";
 import RegisterPrompt from "./RegisterPromt";
 
-function Home({ selectedCategory, setSelectedCategory }) { // Recibe el estado y la función para actualizar la categoría
+function Home({ selectedCategory, setSelectedCategory }) { 
   return (
     <div>
       <Header />
       <Categories 
-        selectedCategory={selectedCategory} // Pasa el estado de la categoría seleccionada
-        setSelectedCategory={setSelectedCategory} // Pasa la función para actualizar la categoría
+        selectedCategory={selectedCategory} 
+        setSelectedCategory={setSelectedCategory} 
       />
       <Testimonial />
       <Gallery />

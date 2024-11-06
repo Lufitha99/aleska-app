@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import KmodeloImage from "../Assets/Kmodelo.jpg";
 import AccImage from "../Assets/Acc.jpg";
-import styles from "../styles/Gallery.module.css"; // Importamos el módulo CSS
+import styles from "../styles/Gallery.module.css"; 
 
 function Gallery() {
   const [hoveredIndex, setHoveredIndex] = useState(null);

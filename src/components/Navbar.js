@@ -39,7 +39,7 @@ const NavLinks = styled.ul`
   padding: 0;
 
   @media (max-width: 768px) {
-    display: none; // Mostrar u ocultar según el estado
+    display: none; 
     flex-direction: column;
   }
 `;
@@ -49,7 +49,7 @@ const NavItem = styled.li`
   text-transform: uppercase;
 
   @media (max-width: 768px) {
-    font-size: 0.9rem; // Tamaño de fuente más pequeño en móviles
+    font-size: 0.9rem;
   }
 `;
 
@@ -71,12 +71,12 @@ const NavLink = styled(Link)`
 `;
 
 const Hamburger = styled.div`
-  display: none; // Ocultar en pantallas grandes
+  display: none; 
   flex-direction: column;
   cursor: pointer;
 
   @media (max-width: 768px) {
-    display: flex; // Mostrar solo en móviles
+    display: flex; 
   }
 
   div {
@@ -89,7 +89,7 @@ const Hamburger = styled.div`
 `;
 
 const MobileMenu = styled.div`
-  display: none; // Ocultar en pantallas grandes
+  display: none; 
   position: absolute;
   top: 80px;
   left: 0;
@@ -100,7 +100,7 @@ const MobileMenu = styled.div`
 
   @media (max-width: 768px) {
     display: ${({ isOpen }) =>
-      isOpen ? "block" : "none"}; // Mostrar u ocultar según el estado
+      isOpen ? "block" : "none"}; 
   }
 `;
 
@@ -154,7 +154,7 @@ const CategoryButton = styled.li`
   }
 
   @media (max-width: 768px) {
-    font-size: 0.9rem; // Tamaño de fuente más pequeño en móviles
+    font-size: 0.9rem; 
   }
 `;
 
@@ -163,29 +163,29 @@ const Divlogo = styled.div`
   justify-content: start;
   flex-grow: 0.5;
   @media (max-width: 768px) {
-    flex-grow: 0.9;
+    flex-grow: 1;
   }
   @media (max-width: 425px) {
-    flex-grow: 0.8;
+    flex-grow: 1;
   }
 `;
 const StyledButton = styled.button`
-  display: flex; /* Utiliza flexbox para alinear elementos en una línea */
-  align-items: center; /* Centra verticalmente los elementos */
-  color: inherit; /* Hereda el color del elemento padre */
-  background-color: transparent; /* Fondo transparente, o ajusta según necesites */
-  border: none; /* Sin borde, ajusta según necesites */
-  cursor: pointer; /* Cambia el cursor al pasar el mouse */
+  display: flex;
+  align-items: center; 
+  color: inherit; 
+  background-color: transparent; 
+  border: none; 
+  cursor: pointer; 
   text-transform: uppercase;
   span {
-    margin-right: 8px; /* Espacio entre elementos, ajusta el tamaño según sea necesario */
+    margin-right: 8px; 
   }
   i {
     margin-right: 2px;
   }
 
   &:hover {
-    color: fuchsia; /* Cambia el color al hacer hover */
+    color: fuchsia;
   }
   p {
     margin: 0;
@@ -236,9 +236,8 @@ function Navbar({
   userName,
 }) {
   const internalLogout = () => {
-    // Aquí podrías agregar la lógica adicional que necesites antes de cerrar sesión
     console.log("Cerrando sesión internamente...");
-    handleLogout(); // Llamar a la función de cierre de sesión pasada como prop
+    handleLogout(); 
   };
   const [categories, setCategories] = useState([]);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -278,7 +277,7 @@ function Navbar({
             src={LogoImage}
             alt="ALESKA Logo"
             onClick={() => {
-              navigate("/"); // Redirigir a la página de inicio
+              navigate("/"); 
             }}
           />
         </Divlogo>
@@ -362,7 +361,7 @@ function Navbar({
                   className={`${selectedCategory === "home" ? "active" : ""}`}
                   onClick={() => {
                     setSelectedCategory("all");
-                    navigate("/"); // Redirigir a la página de productos
+                    navigate("/"); 
                     closeMenu();
                   }}
                 >
@@ -372,7 +371,7 @@ function Navbar({
                   className={`${selectedCategory === "all" ? "active" : ""}`}
                   onClick={() => {
                     setSelectedCategory("all");
-                    navigate("/products"); // Redirigir a la página de productos
+                    navigate("/products"); 
                     closeMenu();
                   }}
                 >
@@ -396,7 +395,7 @@ function Navbar({
                   <CategoryButton
                     className={`${
                       selectedCategory === "logout" ? "active" : ""
-                    }`} // Cerrar sesión
+                    }`} 
                   >
                     <p style={{marginBottom: '0',color: '#fffefe'}}>{userName}</p>
                     <StyledButton onClick={internalLogout}>
@@ -404,9 +403,7 @@ function Navbar({
                         className="fa-regular fa-user"
                         style={{ marginLeft: "14px" }}
                       ></i>
-
                       <SpanMensaje>Cerrar sesión</SpanMensaje>
-
                     </StyledButton>
                   </CategoryButton>
                 ) : (
@@ -416,7 +413,7 @@ function Navbar({
                     }`}
                     onClick={() => {
                       setSelectedCategory("all");
-                      navigate("/login"); // Redirigir a la página de login
+                      navigate("/login"); 
                       closeMenu();
                     }}
                   >
@@ -440,7 +437,7 @@ function Navbar({
               className={`${selectedCategory === "home" ? "active" : ""}`}
               onClick={() => {
                 setSelectedCategory("all");
-                navigate("/"); // Redirigir a la página de productos
+                navigate("/"); 
                 closeMenu();
               }}
             >
@@ -450,7 +447,7 @@ function Navbar({
               className={`${selectedCategory === "all" ? "active" : ""}`}
               onClick={() => {
                 setSelectedCategory("all");
-                navigate("/products"); // Redirigir a la página de productos
+                navigate("/products"); 
                 closeMenu();
               }}
             >
@@ -462,19 +459,19 @@ function Navbar({
                 className={`${selectedCategory === category ? "active" : ""}`}
                 onClick={() => {
                   setSelectedCategory(category);
-                  // Usa el mapeo para obtener la URL en inglés
+                  
                   const englishCategory = categoryMapping[category];
-                  navigate(`/products/${englishCategory}`); // Redirige a la categoría en inglés
+                  navigate(`/products/${englishCategory}`); 
                   closeMenu();
                 }}
               >
-                {category} {/* Esto mostrará el nombre en español */}
+                {category}
               </CategoryButton>
             ))}
             {userId ? (
               <CategoryButton
                 className={`${selectedCategory === "logout" ? "active" : ""}`}
-                onClick={internalLogout} // Cerrar sesión
+                onClick={internalLogout} 
               >
                 <p style={{marginBottom: '0',color: '#fffefe'}}>{userName}</p>
                 <StyledButton onClick={internalLogout}>
@@ -490,7 +487,7 @@ function Navbar({
                 className={`${selectedCategory === "login" ? "active" : ""}`}
                 onClick={() => {
                   setSelectedCategory("all");
-                  navigate("/login"); // Redirigir a la página de login
+                  navigate("/login"); 
                   closeMenu();
                 }}
               >
