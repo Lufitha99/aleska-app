@@ -63,7 +63,7 @@ const styles = {
     borderRadius: "10px",
     boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
     textAlign: "center",
-    margin: "5% auto",
+    margin: "8.5% auto",
     maxWidth: "1000px",
   },
   title: {
